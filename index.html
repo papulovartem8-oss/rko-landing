@@ -431,24 +431,23 @@
     const hdr=document.getElementById('hdr');
     window.addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40)});
 
-    // ─ Hero title typewriter
+    // ─ Hero title word reveal
     const title=document.getElementById('heroTitle');
-    const lines=[
-        {t:'Запускаем ',c:''},
-        {t:'РКО ',c:'y'},
-        {t:'для вашего бизнеса',c:''}
+    const words=[
+        {t:'Запускаем',c:''},
+        {t:'РКО',c:'y'},
+        {t:'для',c:''},
+        {t:'вашего',c:''},
+        {t:'бизнеса',c:''}
     ];
-    let html='';
-    lines.forEach(l=>{
-        const chars=l.t.split('');
-        chars.forEach(ch=>{
-            const cls=l.c?` class="${l.c}"`:'';
-            html+=ch===' '?' ':`<span${cls} style="display:inline-block;opacity:0;transform:translateY(16px);transition:opacity .35s,transform .35s">${ch}</span>`;
-        });
+    words.forEach((w,i)=>{
+        const span=document.createElement('span');
+        span.textContent=w.t;
+        if(w.c)span.className=w.c;
+        span.style.cssText='display:inline-block;opacity:0;transform:translateY(18px);transition:opacity .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1);margin-right:.3em';
+        title.appendChild(span);
+        setTimeout(()=>{span.style.opacity='1';span.style.transform='translateY(0)'},250+i*130);
     });
-    title.innerHTML=html;
-    const spans=title.querySelectorAll('span');
-    spans.forEach((s,i)=>setTimeout(()=>{s.style.opacity='1';s.style.transform='translateY(0)'},200+i*40));
 
     // ─ Scroll anim observer
     const obs=new IntersectionObserver(entries=>{
