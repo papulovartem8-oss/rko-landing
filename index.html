@@ -153,7 +153,6 @@
 
         /* ── CIRCLES FLOW ── */
         .circles-flow{display:flex;flex-direction:column;align-items:center;gap:0}
-        .circle-group{display:flex;flex-direction:column;align-items:center}
         .circle-step{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:220px}
         .circle-icon{width:90px;height:90px;border-radius:50%;border:2px solid var(--border2);background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:all .4s;position:relative}
         .circle-icon::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,var(--yglow),transparent 70%);opacity:0;transition:opacity .4s}
@@ -239,7 +238,8 @@
         }
         @media(min-width:901px){
             .circles-flow{flex-direction:row;align-items:flex-start;justify-content:center}
-            .circle-group{flex-direction:column;align-items:center;flex:1;max-width:220px}
+            .circle-step{flex:1;max-width:220px}
+            .circle-arrow{padding:32px 8px 0}
             .circle-arrow svg{transform:rotate(-90deg)}
         }
     </style>
@@ -304,45 +304,36 @@
             <h2 class="sec-title">Путь к успеху</h2>
         </div>
         <div class="circles-flow" data-anim="up" data-delay="200">
-            <div class="circle-group">
-                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
-                <div class="circle-step">
-                    <div class="circle-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
-                    </div>
-                    <h3>Инвестирование</h3>
-                    <p>Вкладываем ресурсы в перспективных авторов</p>
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
                 </div>
+                <h3>Инвестирование</h3>
+                <p>Вкладываем ресурсы в перспективных авторов</p>
             </div>
-            <div class="circle-group">
-                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
-                <div class="circle-step">
-                    <div class="circle-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                    </div>
-                    <h3>Продвижение</h3>
-                    <p>Масштабируем охваты и выводим в топ</p>
+            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 </div>
+                <h3>Продвижение</h3>
+                <p>Масштабируем охваты и выводим в топ</p>
             </div>
-            <div class="circle-group">
-                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
-                <div class="circle-step">
-                    <div class="circle-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    </div>
-                    <h3>Монетизация</h3>
-                    <p>Превращаем аудиторию в стабильный доход</p>
+            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                 </div>
+                <h3>Монетизация</h3>
+                <p>Превращаем аудиторию в стабильный доход</p>
             </div>
-            <div class="circle-group">
-                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
-                <div class="circle-step">
-                    <div class="circle-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <h3>Построение бренда</h3>
-                    <p>Создаём узнаваемое имя и долгосрочную ценность</p>
+            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                 </div>
+                <h3>Построение бренда</h3>
+                <p>Создаём узнаваемое имя и долгосрочную ценность</p>
             </div>
         </div>
     </div>
