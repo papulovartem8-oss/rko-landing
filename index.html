@@ -66,24 +66,9 @@
         .btn-ghost:hover{border-color:var(--yellow);color:var(--yellow);background:var(--yglow2)}
 
         .hero-right{position:relative;display:flex;justify-content:center}
-        .hero-visual{width:100%;max-width:420px;aspect-ratio:1;border-radius:24px;border:1px solid var(--border);background:var(--bg2);position:relative;overflow:hidden}
-        .hero-visual::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--yglow2) 0%,transparent 50%,var(--yglow2) 100%);z-index:1}
-        .hv-line{position:absolute;background:var(--border);z-index:2}
-        .hv-h{height:1px;left:0;right:0}.hv-v{width:1px;top:0;bottom:0}
-        .hv-h1{top:33%}.hv-h2{top:66%}.hv-v1{left:33%}.hv-v2{left:66%}
-        .hv-cell{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-        .hv-cell .num{font-size:28px;font-weight:900;color:var(--yellow);letter-spacing:-.03em}
-        .hv-cell .lbl{font-size:10px;color:var(--w40);text-transform:uppercase;letter-spacing:.06em;text-align:center}
-        .hv-c1{top:5%;left:5%;width:28%;height:31%}
-        .hv-c2{top:5%;left:36%;width:28%;height:31%}
-        .hv-c3{top:5%;right:5%;width:28%;height:31%}
-        .hv-c4{top:36%;left:5%;width:61%;height:28%;flex-direction:row;gap:16px}
-        .hv-c4 .num{font-size:36px}
-        .hv-c5{top:36%;right:5%;width:28%;height:28%}
-        .hv-icon{width:36px;height:36px;border-radius:10px;background:var(--yglow);display:flex;align-items:center;justify-content:center}
-        .hv-icon svg{width:18px;height:18px;stroke:var(--yellow);fill:none;stroke-width:1.8}
-        .hv-big{top:68%;left:5%;right:5%;bottom:5%;display:flex;align-items:center;justify-content:center;gap:12px}
-        .hv-big .lbl{font-size:13px;color:var(--w60);text-align:left;line-height:1.4}
+        .hero-photo{width:100%;max-width:420px;position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+        .hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,8,10,.6) 100%);pointer-events:none}
+        .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
 
         /* ── SCROLL ANIMATIONS ── */
         [data-anim]{opacity:0;transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
@@ -218,7 +203,7 @@
 <header id="hdr">
     <div class="inner">
         <a href="#" class="logo">
-            <img src="photo_2026-07-15_19-57-30.jpg" alt="MK">
+            <img src="photo_2026-07-16_13-23-00.jpg" alt="MK">
             <span>MK <em>Agency</em></span>
         </a>
         <button class="burger" onclick="document.querySelector('nav').classList.toggle('open')" aria-label="Menu">
@@ -244,9 +229,9 @@
     <div class="wrap">
         <div class="hero-grid">
             <div class="hero-left">
-                <div class="hero-tag" data-anim="up"><span class="dot"></span> Агентство по запуску РКО</div>
+                <div class="hero-tag" data-anim="up"><span class="dot"></span> Production Agency</div>
                 <h1 id="heroTitle"></h1>
-                <p class="hero-desc" data-anim="up" data-delay="700">Подключаем расчётно-кассовое обслуживание под ключ. Находим лучшие условия среди 50+ банков, берём на себя документы и запуск.</p>
+                <p class="hero-desc" data-anim="up" data-delay="700">Мы верим, что большие имена не рождаются — они создаются. Именно поэтому инвестируем в молодых, амбициозных и талантливых инфлюенсеров, которые готовы заявить о себе.</p>
                 <div class="hero-actions" data-anim="up" data-delay="900">
                     <a href="https://t.me/excellent_g" target="_blank" rel="noopener" class="btn-glow">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg>
@@ -256,26 +241,8 @@
                 </div>
             </div>
             <div class="hero-right" data-anim="scale" data-delay="400">
-                <div class="hero-visual">
-                    <div class="hv-line hv-h hv-h1"></div>
-                    <div class="hv-line hv-h hv-h2"></div>
-                    <div class="hv-line hv-v hv-v1"></div>
-                    <div class="hv-line hv-v hv-v2"></div>
-                    <div class="hv-cell hv-c1"><div class="num" data-count="200">0</div><div class="lbl">компаний</div></div>
-                    <div class="hv-cell hv-c2"><div class="num" data-count="50">0</div><div class="lbl">банков</div></div>
-                    <div class="hv-cell hv-c3"><div class="num" data-count="98">0</div><div class="lbl">% одобрение</div></div>
-                    <div class="hv-cell hv-c4">
-                        <div class="hv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-                        <div><div class="lbl" style="font-size:13px;color:var(--w60)">Средний запуск</div><div class="num" style="font-size:28px">3 дня</div></div>
-                    </div>
-                    <div class="hv-cell hv-c5">
-                        <div class="hv-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                        <div class="lbl" style="margin-top:6px">Надёжность</div>
-                    </div>
-                    <div class="hv-cell hv-big">
-                        <div class="hv-icon"><svg viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg></div>
-                        <div class="lbl" style="font-size:13px;color:var(--w60)">Полный цикл РКО<br>Счета, эквайринг, тарифы</div>
-                    </div>
+                <div class="hero-photo">
+                    <img src="photo_2026-07-16_22-34-53.jpg" alt="Mazin-Klementev Production">
                 </div>
             </div>
         </div>
@@ -409,7 +376,7 @@
 <footer>
     <div class="wrap ft">
         <div class="ft-left">
-            <img src="photo_2026-07-15_19-57-30.jpg" alt="MK">
+            <img src="photo_2026-07-16_13-23-00.jpg" alt="MK">
             <span class="ft-copy">&copy; 2025 MK Agency</span>
         </div>
         <div class="ft-links">
@@ -434,11 +401,8 @@
     // ─ Hero title word reveal
     const title=document.getElementById('heroTitle');
     const words=[
-        {t:'Запускаем',c:''},
-        {t:'РКО',c:'y'},
-        {t:'для',c:''},
-        {t:'вашего',c:''},
-        {t:'бизнеса',c:''}
+        {t:'Mazin-Klementev',c:'y'},
+        {t:'Production',c:''}
     ];
     words.forEach((w,i)=>{
         const span=document.createElement('span');
