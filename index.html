@@ -81,7 +81,8 @@
         .hero-photo.show{opacity:1;transform:scale(1)}
         .hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,8,10,.6) 100%);pointer-events:none}
         .hero-photo img{width:100%;height:auto;object-fit:cover;display:block}
-        .hero-caption{font-size:15px;color:var(--w40);line-height:1.7;margin-top:20px;max-width:600px;text-align:center;opacity:0;transform:translateY(16px);transition:opacity .6s 1s,transform .6s 1s}
+        .hero-caption{font-size:15px;line-height:1.7;margin-top:20px;max-width:600px;text-align:center;opacity:0;transform:translateY(16px);transition:opacity .6s 1s,transform .6s 1s;background:linear-gradient(90deg,var(--w60),var(--yellow),var(--yellow2),var(--w60),var(--yellow));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmerText 4s ease-in-out infinite}
+        @keyframes shimmerText{0%{background-position:100% 50%}50%{background-position:0% 50%}100%{background-position:100% 50%}}
         .hero-caption.show{opacity:1;transform:translateY(0)}
 
         /* ── GLOW LINE ── */
@@ -165,9 +166,10 @@
         .cta-card>p{font-size:15px;color:var(--w40);margin-bottom:40px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;position:relative;z-index:1}
 
         /* ── STICKY TG BTN ── */
-        .sticky-tg{position:fixed;bottom:28px;right:28px;z-index:99;display:flex;align-items:center;gap:8px;padding:14px 24px;border-radius:14px;background:var(--yellow);color:var(--bg);font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 32px rgba(245,197,24,.3),0 0 0 1px rgba(245,197,24,.5);transition:all .35s;opacity:0;transform:translateY(20px);pointer-events:none}
+        .sticky-tg{position:fixed;bottom:28px;right:28px;z-index:99;display:flex;align-items:center;gap:8px;padding:14px 24px;border-radius:14px;background:var(--yellow);color:var(--bg);font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 32px rgba(245,197,24,.3),0 0 0 1px rgba(245,197,24,.5);transition:all .35s;opacity:0;transform:translateY(20px);pointer-events:none;animation:tgPulse 2s ease-in-out infinite}
         .sticky-tg.show{opacity:1;transform:translateY(0);pointer-events:auto}
         .sticky-tg:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 40px rgba(245,197,24,.45),0 0 0 1px var(--yellow)}
+        @keyframes tgPulse{0%,100%{box-shadow:0 8px 32px rgba(245,197,24,.3),0 0 0 1px rgba(245,197,24,.5),0 0 0 0 rgba(245,197,24,.4)}50%{box-shadow:0 8px 32px rgba(245,197,24,.5),0 0 0 1px rgba(245,197,24,.7),0 0 20px 6px rgba(245,197,24,.25)}}
         .sticky-tg svg{width:18px;height:18px}
 
         /* ── FOOTER ── */
@@ -419,7 +421,7 @@
     <div class="wrap ft">
         <div class="ft-left">
             <img src="photo_2026-07-16_13-23-00.jpg" alt="MK">
-            <span class="ft-copy">&copy; 2025 M&amp;K Production center</span>
+            <span class="ft-copy">&copy; 2026 M&amp;K Production center</span>
         </div>
         <div class="ft-links">
             <a href="https://t.me/excellent_g" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg></a>
