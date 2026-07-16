@@ -457,13 +457,24 @@
 
         var title=document.getElementById('heroTitle');
         var words=[{t:'M&K',c:'y'},{t:'Production',c:''},{t:'center',c:''}];
-        words.forEach(function(w,i){
-            var span=document.createElement('span');
-            span.textContent=w.t;
-            if(w.c)span.className=w.c;
-            span.style.cssText='display:inline-block;opacity:0;transform:translateY(18px) scale(.95);transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);margin-right:.3em';
-            title.appendChild(span);
-            setTimeout(function(){span.style.opacity='1';span.style.transform='translateY(0) scale(1)'},400+i*160);
+        var charIdx=0;
+        words.forEach(function(w){
+            var wordSpan=document.createElement('span');
+            wordSpan.style.cssText='display:inline-block;margin-right:.3em';
+            if(w.c)wordSpan.className=w.c;
+            for(var j=0;j<w.t.length;j++){
+                var ch=document.createElement('span');
+                ch.textContent=w.t[j];
+                ch.style.cssText='opacity:0;display:inline-block;filter:blur(8px);transition:opacity .3s,filter .3s';
+                ch.dataset.ci=charIdx++;
+                wordSpan.appendChild(ch);
+            }
+            title.appendChild(wordSpan);
+        });
+        var allChars=title.querySelectorAll('[data-ci]');
+        allChars.forEach(function(ch){
+            var ci=parseInt(ch.dataset.ci);
+            setTimeout(function(){ch.style.opacity='1';ch.style.filter='blur(0)'},400+ci*50);
         });
 
         setTimeout(function(){document.getElementById('heroDesc').classList.add('show')},900);
