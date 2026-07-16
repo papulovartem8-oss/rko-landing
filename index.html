@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mazin-Klementev Production</title>
+    <title>M&amp;K Production center</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -152,17 +152,18 @@
         .cta-card>p{font-size:15px;color:var(--w40);margin-bottom:40px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;position:relative;z-index:1}
 
         /* ── CIRCLES FLOW ── */
-        .circles-flow{display:flex;align-items:flex-start;justify-content:center;gap:0;flex-wrap:nowrap}
-        .circle-step{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;max-width:200px}
-        .circle-icon{width:100px;height:100px;border-radius:50%;border:2px solid var(--border2);background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:all .4s;position:relative}
+        .circles-flow{display:flex;flex-direction:column;align-items:center;gap:0}
+        .circle-group{display:flex;flex-direction:column;align-items:center}
+        .circle-step{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:220px}
+        .circle-icon{width:90px;height:90px;border-radius:50%;border:2px solid var(--border2);background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:all .4s;position:relative}
         .circle-icon::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,var(--yglow),transparent 70%);opacity:0;transition:opacity .4s}
         .circle-step:hover .circle-icon{border-color:var(--yellow);box-shadow:0 0 24px var(--yglow)}
         .circle-step:hover .circle-icon::before{opacity:1}
-        .circle-icon svg{width:36px;height:36px;position:relative;z-index:1}
+        .circle-icon svg{width:32px;height:32px;position:relative;z-index:1}
         .circle-step h3{font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
-        .circle-step p{font-size:12px;color:var(--w40);line-height:1.5;padding:0 4px}
-        .circle-arrow{display:flex;align-items:center;padding-top:32px}
-        .circle-arrow svg{width:32px;height:32px;opacity:.4}
+        .circle-step p{font-size:13px;color:var(--w40);line-height:1.5;padding:0 4px}
+        .circle-arrow{display:flex;align-items:center;justify-content:center;padding:12px 0}
+        .circle-arrow svg{width:28px;height:28px;opacity:.4}
 
         /* ── CALCULATOR ── */
         .calc-card{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:48px;border-radius:20px;border:1px solid var(--border);background:var(--bg3)}
@@ -200,38 +201,46 @@
 
         /* ── RESPONSIVE ── */
         @media(max-width:900px){
-            .hero-grid{grid-template-columns:1fr;gap:40px}
+            .hero-grid{grid-template-columns:1fr;gap:32px}
             .hero-right{order:-1}
-            .hero h1{font-size:38px}
-            .bento{grid-template-columns:1fr}
-            .bento-card.wide{grid-column:span 1}
-            .why-grid{grid-template-columns:1fr}
-            .why-visual{position:static;margin-top:32px}
-            .steps{flex-direction:column;gap:20px}
-            .steps::before{display:none}
-            .step-item{padding-top:0;padding-left:44px;text-align:left}
-            .step-dot{left:0;top:50%;transform:translateY(-50%)}
-            .sec-title{font-size:32px}
-            .circles-flow{flex-wrap:wrap;gap:24px;justify-content:center}
-            .circle-arrow{display:none}
-            .circle-step{max-width:140px}
-            .circle-icon{width:80px;height:80px}
-            .circle-icon svg{width:28px;height:28px}
-            .calc-card{grid-template-columns:1fr;gap:32px;padding:32px}
+            .hero h1{font-size:36px}
+            .hero-left{max-width:100%}
+            .sec-title{font-size:30px}
+            .calc-card{grid-template-columns:1fr;gap:32px;padding:28px}
         }
         @media(max-width:640px){
-            .hero{padding:100px 0 60px;min-height:auto}
-            .hero h1{font-size:26px}
+            .wrap{padding:0 16px}
+            .hero{padding:90px 0 48px;min-height:auto}
+            .hero h1{font-size:28px}
+            .hero-desc{font-size:14px;margin-bottom:28px}
+            .hero-caption{font-size:13px;margin-top:14px}
+            .hero-photo{border-radius:16px}
             nav{display:none}
             nav.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:var(--bg2);padding:20px 28px;gap:16px;border-bottom:1px solid var(--border);z-index:99}
             .burger{display:block}
-            .hero-actions{flex-direction:column;width:100%}
-            .hero-actions .btn-glow,.hero-actions .btn-ghost{width:100%;justify-content:center}
+            .sec{padding:64px 0}
+            .sec-head{margin-bottom:40px}
+            .sec-title{font-size:26px}
+            .sec-desc{font-size:13px}
+            .marquee-wrap{padding:28px 0}
+            .circle-icon{width:80px;height:80px}
+            .circle-icon svg{width:28px;height:28px}
+            .circle-step p{font-size:12px}
+            .circle-arrow{padding:8px 0}
+            .circle-arrow svg{width:24px;height:24px}
+            .calc-card{padding:20px;gap:24px}
+            .calc-result-num{font-size:32px}
+            .calc-result{padding:24px 16px}
+            .btn-glow{padding:12px 24px;font-size:14px}
+            .cta-card{padding:48px 20px}
+            .cta-card h2{font-size:26px}
             .ft{flex-direction:column;gap:16px;text-align:center}
-            .sec{padding:80px 0}
-            .cta-card{padding:56px 24px}
-            .cta-card h2{font-size:30px}
-            .sticky-tg{right:16px;bottom:16px;padding:12px 18px;font-size:13px;border-radius:12px}
+            .sticky-tg{right:14px;bottom:14px;padding:11px 16px;font-size:13px;border-radius:12px}
+        }
+        @media(min-width:901px){
+            .circles-flow{flex-direction:row;align-items:flex-start;justify-content:center}
+            .circle-group{flex-direction:column;align-items:center;flex:1;max-width:220px}
+            .circle-arrow svg{transform:rotate(-90deg)}
         }
     </style>
 </head>
@@ -241,7 +250,7 @@
     <div class="inner">
         <a href="#" class="logo">
             <img src="photo_2026-07-16_13-23-00.jpg" alt="MK">
-            <span>MK <em>Agency</em></span>
+            <span>M&amp;K <em>Production</em></span>
         </a>
         <button class="burger" onclick="document.querySelector('nav').classList.toggle('open')" aria-label="Menu">
             <span></span><span></span><span></span>
@@ -295,36 +304,45 @@
             <h2 class="sec-title">Путь к успеху</h2>
         </div>
         <div class="circles-flow" data-anim="up" data-delay="200">
-            <div class="circle-step">
-                <div class="circle-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+            <div class="circle-group">
+                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
+                <div class="circle-step">
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+                    </div>
+                    <h3>Инвестирование</h3>
+                    <p>Вкладываем ресурсы в перспективных авторов</p>
                 </div>
-                <h3>Инвестирование</h3>
-                <p>Вкладываем ресурсы в перспективных авторов</p>
             </div>
-            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
-            <div class="circle-step">
-                <div class="circle-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <div class="circle-group">
+                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
+                <div class="circle-step">
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Продвижение</h3>
+                    <p>Масштабируем охваты и выводим в топ</p>
                 </div>
-                <h3>Продвижение</h3>
-                <p>Масштабируем охваты и выводим в топ</p>
             </div>
-            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
-            <div class="circle-step">
-                <div class="circle-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <div class="circle-group">
+                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
+                <div class="circle-step">
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h3>Монетизация</h3>
+                    <p>Превращаем аудиторию в стабильный доход</p>
                 </div>
-                <h3>Монетизация</h3>
-                <p>Превращаем аудиторию в стабильный доход</p>
             </div>
-            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
-            <div class="circle-step">
-                <div class="circle-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <div class="circle-group">
+                <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 13l7 7 7-7"/></svg></div>
+                <div class="circle-step">
+                    <div class="circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Построение бренда</h3>
+                    <p>Создаём узнаваемое имя и долгосрочную ценность</p>
                 </div>
-                <h3>Построение бренда</h3>
-                <p>Создаём узнаваемое имя и долгосрочную ценность</p>
             </div>
         </div>
     </div>
@@ -393,7 +411,7 @@
     <div class="wrap ft">
         <div class="ft-left">
             <img src="photo_2026-07-16_13-23-00.jpg" alt="MK">
-            <span class="ft-copy">&copy; 2025 MK Agency</span>
+            <span class="ft-copy">&copy; 2025 M&amp;K Production center</span>
         </div>
         <div class="ft-links">
             <a href="https://t.me/excellent_g" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg></a>
@@ -417,8 +435,9 @@
     // ─ Hero title word reveal
     const title=document.getElementById('heroTitle');
     const words=[
-        {t:'Mazin-Klementev',c:'y'},
-        {t:'Production',c:''}
+        {t:'M&K',c:'y'},
+        {t:'Production',c:''},
+        {t:'center',c:''}
     ];
     words.forEach((w,i)=>{
         const span=document.createElement('span');
