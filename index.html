@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MK Agency — Запуск РКО для бизнеса</title>
+    <title>Mazin-Klementev Production</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -151,6 +151,36 @@
         .cta-card h2 .y{color:var(--yellow)}
         .cta-card>p{font-size:15px;color:var(--w40);margin-bottom:40px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;position:relative;z-index:1}
 
+        /* ── CIRCLES FLOW ── */
+        .circles-flow{display:flex;align-items:flex-start;justify-content:center;gap:0;flex-wrap:nowrap}
+        .circle-step{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;max-width:200px}
+        .circle-icon{width:100px;height:100px;border-radius:50%;border:2px solid var(--border2);background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:all .4s;position:relative}
+        .circle-icon::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,var(--yglow),transparent 70%);opacity:0;transition:opacity .4s}
+        .circle-step:hover .circle-icon{border-color:var(--yellow);box-shadow:0 0 24px var(--yglow)}
+        .circle-step:hover .circle-icon::before{opacity:1}
+        .circle-icon svg{width:36px;height:36px;position:relative;z-index:1}
+        .circle-step h3{font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+        .circle-step p{font-size:12px;color:var(--w40);line-height:1.5;padding:0 4px}
+        .circle-arrow{display:flex;align-items:center;padding-top:32px}
+        .circle-arrow svg{width:32px;height:32px;opacity:.4}
+
+        /* ── CALCULATOR ── */
+        .calc-card{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:48px;border-radius:20px;border:1px solid var(--border);background:var(--bg3)}
+        .calc-row{margin-bottom:28px}
+        .calc-row:last-child{margin-bottom:0}
+        .calc-label{display:flex;justify-content:space-between;margin-bottom:10px;font-size:14px;font-weight:600}
+        .calc-val{color:var(--yellow);font-weight:700}
+        .calc-range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--border);outline:none;cursor:pointer}
+        .calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--yellow);cursor:pointer;box-shadow:0 0 12px var(--yglow)}
+        .calc-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--yellow);cursor:pointer;border:none;box-shadow:0 0 12px var(--yglow)}
+        .calc-select{width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--border2);background:var(--bg2);color:var(--white);font-size:14px;font-family:'Inter',sans-serif;cursor:pointer;outline:none;transition:border-color .3s}
+        .calc-select:focus{border-color:var(--yellow)}
+        .calc-result{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;border-radius:16px;border:1px solid var(--border);background:var(--bg2)}
+        .calc-result-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--yellow);margin-bottom:12px}
+        .calc-result-num{font-size:42px;font-weight:900;letter-spacing:-.04em;color:var(--white);line-height:1}
+        .calc-result-sub{font-size:13px;color:var(--w40);margin-top:8px}
+        .contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
         /* ── STICKY TG BTN ── */
         .sticky-tg{position:fixed;bottom:28px;right:28px;z-index:99;display:flex;align-items:center;gap:8px;padding:14px 24px;border-radius:14px;background:var(--yellow);color:var(--bg);font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 32px rgba(245,197,24,.3),0 0 0 1px rgba(245,197,24,.5);transition:all .35s;opacity:0;transform:translateY(20px);pointer-events:none}
         .sticky-tg.show{opacity:1;transform:translateY(0);pointer-events:auto}
@@ -182,6 +212,12 @@
             .step-item{padding-top:0;padding-left:44px;text-align:left}
             .step-dot{left:0;top:50%;transform:translateY(-50%)}
             .sec-title{font-size:32px}
+            .circles-flow{flex-wrap:wrap;gap:24px;justify-content:center}
+            .circle-arrow{display:none}
+            .circle-step{max-width:140px}
+            .circle-icon{width:80px;height:80px}
+            .circle-icon svg{width:28px;height:28px}
+            .calc-card{grid-template-columns:1fr;gap:32px;padding:32px}
         }
         @media(max-width:640px){
             .hero{padding:100px 0 60px;min-height:auto}
@@ -211,9 +247,9 @@
             <span></span><span></span><span></span>
         </button>
         <nav>
-            <a href="#services">Услуги</a>
-            <a href="#why">Почему мы</a>
-            <a href="#process">Процесс</a>
+            <a href="#services">Как мы работаем</a>
+            <a href="#calc">Калькулятор</a>
+            <a href="#contact">Контакты</a>
             <a href="https://t.me/excellent_g" target="_blank" rel="noopener" class="hdr-btn">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg>
                 Telegram
@@ -246,122 +282,108 @@
 <!-- ── MARQUEE ── -->
 <div class="marquee-wrap">
     <div class="marquee" id="marquee">
-        <span>Расчётные счета</span><span>Эквайринг</span><span>Зарплатные проекты</span><span>Комплаенс</span><span>Кассовое обслуживание</span><span>Банковские гарантии</span><span>Валютный контроль</span><span>Оптимизация тарифов</span>
-        <span>Расчётные счета</span><span>Эквайринг</span><span>Зарплатные проекты</span><span>Комплаенс</span><span>Кассовое обслуживание</span><span>Банковские гарантии</span><span>Валютный контроль</span><span>Оптимизация тарифов</span>
+        <span>Инфлюенсеры</span><span>Продвижение</span><span>Монетизация</span><span>Бренд</span><span>Инвестиции</span><span>Контент</span><span>Аудитория</span><span>Рост</span>
+        <span>Инфлюенсеры</span><span>Продвижение</span><span>Монетизация</span><span>Бренд</span><span>Инвестиции</span><span>Контент</span><span>Аудитория</span><span>Рост</span>
     </div>
 </div>
 
-<!-- ── SERVICES ── -->
+<!-- ── PROCESS CIRCLES ── -->
 <section class="sec" id="services">
     <div class="wrap">
         <div class="sec-head center" data-anim="up">
-            <div class="sec-label">Что мы делаем</div>
-            <h2 class="sec-title">Услуги по запуску РКО</h2>
-            <p class="sec-desc">Комплексный подход — от подбора банка до ежедневного сопровождения ваших финансовых операций.</p>
+            <div class="sec-label">Как мы работаем</div>
+            <h2 class="sec-title">Путь к успеху</h2>
         </div>
-        <div class="bento">
-            <div class="bento-card wide" data-anim="left">
-                <div class="bc-glow"></div>
-                <div class="bc-icon"><svg viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg></div>
-                <h3>Открытие расчётных счетов</h3>
-                <p>Подберём банк с оптимальными тарифами под специфику вашего бизнеса. Подготовим полный пакет документов и откроем счёт за 1-3 дня без визита в отделение.</p>
-            </div>
-            <div class="bento-card" data-anim="right">
-                <div class="bc-glow"></div>
-                <div class="bc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-                <h3>Эквайринг</h3>
-                <p>Торговый, интернет и мобильный эквайринг с минимальными ставками от наших банков-партнёров.</p>
-            </div>
-            <div class="bento-card" data-anim="left" data-delay="100">
-                <div class="bc-glow"></div>
-                <div class="bc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-                <h3>Оптимизация тарифов</h3>
-                <p>Снижаем расходы на банковское обслуживание за счёт анализа и пересмотра текущих условий.</p>
-            </div>
-            <div class="bento-card wide" data-anim="right" data-delay="100">
-                <div class="bc-glow"></div>
-                <div class="bc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                <h3>Зарплатные проекты и комплаенс</h3>
-                <p>Организуем зарплатный проект с выгодными условиями для сотрудников. Обеспечиваем полное соответствие требованиям ЦБ — минимизируем риск блокировок и ограничений по счетам.</p>
-            </div>
-            <div class="bento-card" data-anim="scale" data-delay="150">
-                <div class="bc-glow"></div>
-                <div class="bc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-                <h3>Аналитика</h3>
-                <p>Прозрачная отчётность и мониторинг операций по всем вашим банковским продуктам.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── WHY US ── -->
-<section class="sec why-bg" id="why">
-    <div class="wrap">
-        <div class="sec-head" data-anim="up">
-            <div class="sec-label">Преимущества</div>
-            <h2 class="sec-title">Почему нам доверяют</h2>
-            <p class="sec-desc">Мы выстраиваем финансовую инфраструктуру, которая работает на рост вашего бизнеса.</p>
-        </div>
-        <div class="why-grid">
-            <div class="why-list">
-                <div class="why-item" data-anim="left">
-                    <div class="why-num">1</div>
-                    <div><h3>Персональный менеджер</h3><p>Выделенный специалист, который решает все вопросы с банками и всегда на связи.</p></div>
+        <div class="circles-flow" data-anim="up" data-delay="200">
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
                 </div>
-                <div class="why-item" data-anim="left" data-delay="100">
-                    <div class="why-num">2</div>
-                    <div><h3>Эксклюзивные условия</h3><p>Партнёрские соглашения с 50+ банками дают нам тарифы ниже рыночных.</p></div>
-                </div>
-                <div class="why-item" data-anim="left" data-delay="200">
-                    <div class="why-num">3</div>
-                    <div><h3>Запуск за 1-3 дня</h3><p>Без бюрократии, лишних визитов и бумажной волокиты. Всё онлайн.</p></div>
-                </div>
-                <div class="why-item" data-anim="left" data-delay="300">
-                    <div class="why-num">4</div>
-                    <div><h3>Полное сопровождение</h3><p>Поддержка на каждом этапе — от документов до ежедневных операций.</p></div>
-                </div>
+                <h3>Инвестирование</h3>
+                <p>Вкладываем ресурсы в перспективных авторов</p>
             </div>
-            <div class="why-visual" data-anim="right">
-                <div class="big-num" data-count="98" data-suffix="%">0%</div>
-                <div class="big-lbl">Клиентов остаются с нами</div>
-                <div class="bar-wrap">
-                    <div class="bar-row"><span class="bar-label">Одобрение</span><div class="bar-track"><div class="bar-fill" data-width="98"></div></div></div>
-                    <div class="bar-row"><span class="bar-label">Скорость</span><div class="bar-track"><div class="bar-fill" data-width="95"></div></div></div>
-                    <div class="bar-row"><span class="bar-label">Экономия</span><div class="bar-track"><div class="bar-fill" data-width="87"></div></div></div>
-                    <div class="bar-row"><span class="bar-label">Поддержка</span><div class="bar-track"><div class="bar-fill" data-width="100"></div></div></div>
+            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 </div>
+                <h3>Продвижение</h3>
+                <p>Масштабируем охваты и выводим в топ</p>
+            </div>
+            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3>Монетизация</h3>
+                <p>Превращаем аудиторию в стабильный доход</p>
+            </div>
+            <div class="circle-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+            <div class="circle-step">
+                <div class="circle-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Построение бренда</h3>
+                <p>Создаём узнаваемое имя и долгосрочную ценность</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── PROCESS ── -->
-<section class="sec" id="process">
+<!-- ── CALCULATOR ── -->
+<section class="sec why-bg" id="calc">
     <div class="wrap">
         <div class="sec-head center" data-anim="up">
-            <div class="sec-label">Как это работает</div>
-            <h2 class="sec-title">Четыре шага до запуска</h2>
-            <p class="sec-desc">Простой и прозрачный процесс — от первой заявки до работающего счёта.</p>
+            <div class="sec-label">Оценка</div>
+            <h2 class="sec-title">Рассчитать потенциал проекта</h2>
         </div>
-        <div class="steps" data-anim="up" data-delay="200">
-            <div class="step-item"><div class="step-dot"></div><h3>Заявка</h3><p>Оставляете заявку — связываемся в&nbsp;течение часа</p></div>
-            <div class="step-item"><div class="step-dot"></div><h3>Анализ</h3><p>Изучаем бизнес и подбираем лучшие предложения</p></div>
-            <div class="step-item"><div class="step-dot"></div><h3>Оформление</h3><p>Готовим документы и подаём заявки в&nbsp;банки</p></div>
-            <div class="step-item"><div class="step-dot"></div><h3>Запуск</h3><p>Активируем счёт, настраиваем сервисы, передаём доступы</p></div>
+        <div class="calc-card" data-anim="up" data-delay="200">
+            <div class="calc-sliders">
+                <div class="calc-row">
+                    <div class="calc-label"><span>Аудитория</span><span class="calc-val" id="audVal">50 000</span></div>
+                    <input type="range" min="1000" max="1000000" value="50000" step="1000" class="calc-range" id="audRange">
+                </div>
+                <div class="calc-row">
+                    <div class="calc-label"><span>Просмотры</span><span class="calc-val" id="viewVal">120 000</span></div>
+                    <input type="range" min="5000" max="5000000" value="120000" step="5000" class="calc-range" id="viewRange">
+                </div>
+                <div class="calc-row">
+                    <div class="calc-label"><span>Тематика</span><span class="calc-val" id="themeVal">Лайфстайл</span></div>
+                    <select class="calc-select" id="themeSelect">
+                        <option value="1.0">Лайфстайл</option>
+                        <option value="1.2">Бизнес</option>
+                        <option value="0.9">Развлечения</option>
+                        <option value="1.3">Финансы</option>
+                        <option value="1.1">Технологии</option>
+                        <option value="0.8">Гейминг</option>
+                    </select>
+                </div>
+            </div>
+            <div class="calc-result">
+                <div class="calc-result-label">Потенциал</div>
+                <div class="calc-result-num" id="calcResult">~185 000 &#8381;/мес</div>
+                <div class="calc-result-sub">Прогнозируемый доход от монетизации</div>
+                <a href="https://t.me/excellent_g" target="_blank" rel="noopener" class="btn-glow" style="margin-top:24px">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg>
+                    Обсудить проект
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ── CTA ── -->
-<section class="cta" id="contact">
+<!-- ── CONTACTS ── -->
+<section class="sec" id="contact">
     <div class="wrap">
         <div class="cta-card" data-anim="scale">
-            <h2>Готовы запустить <span class="y">РКО</span>?</h2>
-            <p>Бесплатная консультация — подберём лучшие условия для вашего бизнеса за один разговор.</p>
-            <a href="https://t.me/excellent_g" target="_blank" rel="noopener" class="btn-glow" style="font-size:16px;padding:16px 36px">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg>
-                Написать в Telegram
-            </a>
+            <h2>Свяжитесь с <span class="y">нами</span></h2>
+            <p>Обсудим ваш проект и расскажем, как мы можем помочь вам вырасти.</p>
+            <div class="contact-links">
+                <a href="https://t.me/excellent_g" target="_blank" rel="noopener" class="btn-glow" style="font-size:16px;padding:16px 36px">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg>
+                    Написать в Telegram
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -467,6 +489,31 @@
     window.addEventListener('scroll',()=>{
         stickyTg.classList.toggle('show',scrollY>600);
     });
+
+    // ─ Calculator
+    const audRange=document.getElementById('audRange');
+    const viewRange=document.getElementById('viewRange');
+    const themeSelect=document.getElementById('themeSelect');
+    const audVal=document.getElementById('audVal');
+    const viewVal=document.getElementById('viewVal');
+    const themeVal=document.getElementById('themeVal');
+    const calcResult=document.getElementById('calcResult');
+
+    function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+    function updateCalc(){
+        const aud=parseInt(audRange.value);
+        const views=parseInt(viewRange.value);
+        const mult=parseFloat(themeSelect.value);
+        audVal.textContent=fmt(aud);
+        viewVal.textContent=fmt(views);
+        themeVal.textContent=themeSelect.options[themeSelect.selectedIndex].text;
+        const result=Math.round((aud*0.8+views*0.5)*mult/1000)*1000;
+        calcResult.textContent='~'+fmt(result)+' ₽/мес';
+    }
+    audRange.addEventListener('input',updateCalc);
+    viewRange.addEventListener('input',updateCalc);
+    themeSelect.addEventListener('change',updateCalc);
+    updateCalc();
 
     // ─ Nav close on link click
     document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>document.querySelector('nav').classList.remove('open')));
