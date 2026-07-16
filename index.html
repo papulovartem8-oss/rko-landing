@@ -205,13 +205,18 @@
         .testi-circle.tc3{background:linear-gradient(135deg,#FFD95A,#D4A810)}
         .testi-circle.tc4{background:linear-gradient(135deg,#B8920E,#D4A810)}
         .testi-circle.tc5{background:linear-gradient(135deg,#F5C518,#B8920E)}
-        .testi-reveal{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s;opacity:0}
-        .testi-reveal.open{max-height:300px;opacity:1}
-        .testi-reveal-inner{border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:28px 32px;text-align:center}
-        .testi-reveal-stars{display:flex;justify-content:center;gap:3px;margin-bottom:12px}
+        .testi-reveal{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1)}
+        .testi-reveal.open{grid-template-rows:1fr}
+        .testi-reveal-wrap{overflow:hidden}
+        .testi-reveal-inner{border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:28px 32px;text-align:center;opacity:0;transform:translateY(-12px) scale(.97);filter:blur(6px);transition:opacity .45s .15s,transform .45s .15s cubic-bezier(.4,0,.2,1),filter .45s .15s}
+        .testi-reveal.open .testi-reveal-inner{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+        .testi-reveal-stars{display:flex;justify-content:center;gap:3px;margin-bottom:12px;opacity:0;transform:translateY(8px);transition:opacity .3s .3s,transform .3s .3s}
+        .testi-reveal.open .testi-reveal-stars{opacity:1;transform:translateY(0)}
         .testi-reveal-stars svg{width:16px;height:16px;fill:var(--yellow)}
-        .testi-reveal-text{font-size:15px;color:var(--w90);line-height:1.7;font-style:italic;margin-bottom:16px}
-        .testi-reveal-who{font-size:13px;color:var(--w40)}
+        .testi-reveal-text{font-size:15px;color:var(--w90);line-height:1.7;font-style:italic;margin-bottom:16px;opacity:0;transform:translateY(10px);transition:opacity .35s .35s,transform .35s .35s}
+        .testi-reveal.open .testi-reveal-text{opacity:1;transform:translateY(0)}
+        .testi-reveal-who{font-size:13px;color:var(--w40);opacity:0;transform:translateY(8px);transition:opacity .3s .45s,transform .3s .45s}
+        .testi-reveal.open .testi-reveal-who{opacity:1;transform:translateY(0)}
         .testi-reveal-who strong{color:var(--white);font-weight:700}
 
         /* ── CTA ── */
@@ -633,11 +638,11 @@
             <div class="testi-circle tc5" data-testi="4" data-name="Игорь">И</div>
         </div>
         <div id="testiReveal" class="testi-reveal open" data-anim="fade">
-            <div class="testi-reveal-inner">
+            <div class="testi-reveal-wrap"><div class="testi-reveal-inner">
                 <div class="testi-reveal-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
                 <div class="testi-reveal-text" id="testiText">«Ребята реально вложились в мой рост. За полгода я вышел на уровень, о котором раньше даже не мечтал. Профессионализм на каждом этапе.»</div>
                 <div class="testi-reveal-who" id="testiWho"><strong>Алексей К.</strong> · Лайфстайл</div>
-            </div>
+            </div></div>
         </div>
     </div>
 </section>
@@ -901,9 +906,13 @@
     var testiReveal=document.getElementById('testiReveal');
     var testiText=document.getElementById('testiText');
     var testiWho=document.getElementById('testiWho');
+    var testiSwitching=false;
     testiCircles.forEach(function(c){
         c.addEventListener('click',function(){
+            if(testiSwitching)return;
             var idx=parseInt(c.dataset.testi);
+            if(c.classList.contains('active'))return;
+            testiSwitching=true;
             testiCircles.forEach(function(cc){cc.classList.remove('active')});
             c.classList.add('active');
             testiReveal.classList.remove('open');
@@ -911,7 +920,8 @@
                 testiText.textContent=testiData[idx].text;
                 testiWho.innerHTML=testiData[idx].who;
                 testiReveal.classList.add('open');
-            },300);
+                testiSwitching=false;
+            },500);
         });
     });
 
