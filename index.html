@@ -195,20 +195,24 @@
         .case-metric-new{font-size:18px;font-weight:800;color:var(--yellow)}
 
         /* ── TESTIMONIALS ── */
-        .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-        .testi-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:32px;transition:all .45s;position:relative}
-        .testi-card:hover{border-color:rgba(245,197,24,.15);transform:translateY(-4px);box-shadow:0 12px 40px var(--yglow2)}
-        .testi-quote-icon{font-size:40px;line-height:1;color:var(--yellow);opacity:.3;margin-bottom:12px;font-family:Georgia,serif}
-        .testi-text{font-size:14px;color:var(--w90);line-height:1.7;margin-bottom:20px;font-style:italic}
-        .testi-author{display:flex;align-items:center;gap:12px}
-        .testi-ava{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--bg)}
-        .testi-ava.ta1{background:linear-gradient(135deg,#F5C518,#FFD95A)}
-        .testi-ava.ta2{background:linear-gradient(135deg,#D4A810,#F5C518)}
-        .testi-ava.ta3{background:linear-gradient(135deg,#FFD95A,#D4A810)}
-        .testi-meta h4{font-size:14px;font-weight:700;margin-bottom:2px}
-        .testi-meta span{font-size:11px;color:var(--w40)}
-        .testi-stars{display:flex;gap:2px;margin-bottom:12px}
-        .testi-stars svg{width:14px;height:14px;fill:var(--yellow)}
+        .testi-circles{display:flex;justify-content:center;gap:20px;margin-bottom:32px}
+        .testi-circle{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--bg);cursor:pointer;transition:all .4s;border:3px solid transparent;position:relative}
+        .testi-circle::after{content:attr(data-name);position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--w40);white-space:nowrap;font-weight:600;transition:color .3s}
+        .testi-circle.active{border-color:var(--yellow);box-shadow:0 0 24px rgba(245,197,24,.4);transform:scale(1.12)}
+        .testi-circle.active::after{color:var(--yellow)}
+        .testi-circle.tc1{background:linear-gradient(135deg,#F5C518,#FFD95A)}
+        .testi-circle.tc2{background:linear-gradient(135deg,#D4A810,#F5C518)}
+        .testi-circle.tc3{background:linear-gradient(135deg,#FFD95A,#D4A810)}
+        .testi-circle.tc4{background:linear-gradient(135deg,#B8920E,#D4A810)}
+        .testi-circle.tc5{background:linear-gradient(135deg,#F5C518,#B8920E)}
+        .testi-reveal{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s;opacity:0}
+        .testi-reveal.open{max-height:300px;opacity:1}
+        .testi-reveal-inner{border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:28px 32px;text-align:center}
+        .testi-reveal-stars{display:flex;justify-content:center;gap:3px;margin-bottom:12px}
+        .testi-reveal-stars svg{width:16px;height:16px;fill:var(--yellow)}
+        .testi-reveal-text{font-size:15px;color:var(--w90);line-height:1.7;font-style:italic;margin-bottom:16px}
+        .testi-reveal-who{font-size:13px;color:var(--w40)}
+        .testi-reveal-who strong{color:var(--white);font-weight:700}
 
         /* ── CTA ── */
         .cta-card{position:relative;border-radius:24px;border:1px solid var(--border);background:var(--bg2);padding:80px 40px;text-align:center;overflow:hidden}
@@ -247,7 +251,6 @@
             .stats{grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
             .authors-grid{grid-template-columns:1fr 1fr}
             .cases-grid{grid-template-columns:1fr}
-            .testimonials-grid{grid-template-columns:1fr}
         }
         @media(max-width:640px){
             .wrap{padding:0 16px}
@@ -281,9 +284,11 @@
             .case-card{padding:24px}
             .case-title{font-size:17px}
             .case-metrics{gap:16px}
-            .testimonials-grid{gap:16px}
-            .testi-card{padding:24px}
-            .testi-text{font-size:13px}
+            .testi-circles{gap:14px}
+            .testi-circle{width:56px;height:56px;font-size:20px}
+            .testi-circle::after{font-size:10px;bottom:-18px}
+            .testi-reveal-inner{padding:20px 16px}
+            .testi-reveal-text{font-size:14px}
             .calc-card{padding:20px;gap:24px}
             .calc-result-num{font-size:32px}
             .calc-result{padding:24px 16px}
@@ -618,32 +623,20 @@
         <div class="sec-head center" data-anim="up">
             <div class="sec-label">Доверие</div>
             <h2 class="sec-title">Отзывы</h2>
-            <p class="sec-desc">Что говорят наши резиденты</p>
+            <p class="sec-desc">Нажмите на аватар, чтобы прочитать отзыв</p>
         </div>
-        <div class="testimonials-grid">
-            <div class="testi-card" data-anim="up" data-delay="0">
-                <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
-                <div class="testi-text">«Ребята реально вложились в мой рост. За полгода я вышел на уровень, о котором раньше даже не мечтал. Профессионализм на каждом этапе.»</div>
-                <div class="testi-author">
-                    <div class="testi-ava ta1">А</div>
-                    <div class="testi-meta"><h4>Алексей К.</h4><span>1.2M подписчиков · Лайфстайл</span></div>
-                </div>
-            </div>
-            <div class="testi-card" data-anim="up" data-delay="150">
-                <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
-                <div class="testi-text">«M&K — это не просто агентство, это команда, которая верит в тебя. Они помогли мне запустить собственный бренд и выйти на новый уровень дохода.»</div>
-                <div class="testi-author">
-                    <div class="testi-ava ta2">М</div>
-                    <div class="testi-meta"><h4>Мария В.</h4><span>850K подписчиков · Beauty</span></div>
-                </div>
-            </div>
-            <div class="testi-card" data-anim="up" data-delay="300">
-                <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
-                <div class="testi-text">«Чёткая стратегия, прозрачные условия и реальные результаты. Мой канал вырос в 10 раз за год. Рекомендую всем, кто хочет расти серьёзно.»</div>
-                <div class="testi-author">
-                    <div class="testi-ava ta3">Д</div>
-                    <div class="testi-meta"><h4>Дмитрий Р.</h4><span>620K подписчиков · Бизнес</span></div>
-                </div>
+        <div class="testi-circles" data-anim="up" data-delay="100">
+            <div class="testi-circle tc1 active" data-testi="0" data-name="Алексей">А</div>
+            <div class="testi-circle tc2" data-testi="1" data-name="Мария">М</div>
+            <div class="testi-circle tc3" data-testi="2" data-name="Дмитрий">Д</div>
+            <div class="testi-circle tc4" data-testi="3" data-name="Екатерина">Е</div>
+            <div class="testi-circle tc5" data-testi="4" data-name="Игорь">И</div>
+        </div>
+        <div id="testiReveal" class="testi-reveal open" data-anim="fade">
+            <div class="testi-reveal-inner">
+                <div class="testi-reveal-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
+                <div class="testi-reveal-text" id="testiText">«Ребята реально вложились в мой рост. За полгода я вышел на уровень, о котором раньше даже не мечтал. Профессионализм на каждом этапе.»</div>
+                <div class="testi-reveal-who" id="testiWho"><strong>Алексей К.</strong> · Лайфстайл</div>
             </div>
         </div>
     </div>
@@ -895,6 +888,32 @@
     viewRange.addEventListener('input',updateCalc);
     themeSelect.addEventListener('change',updateCalc);
     updateCalc();
+
+    // testimonials circles
+    var testiData=[
+        {text:'«Ребята реально вложились в мой рост. За полгода я вышел на уровень, о котором раньше даже не мечтал. Профессионализм на каждом этапе.»',who:'<strong>Алексей К.</strong> · Лайфстайл'},
+        {text:'«M&K — это не просто агентство, это команда, которая верит в тебя. Они помогли мне запустить собственный бренд и выйти на новый уровень дохода.»',who:'<strong>Мария В.</strong> · Beauty'},
+        {text:'«Чёткая стратегия, прозрачные условия и реальные результаты. Мой канал вырос в 10 раз за год. Рекомендую всем, кто хочет расти серьёзно.»',who:'<strong>Дмитрий Р.</strong> · Бизнес'},
+        {text:'«Благодаря команде M&K я получила контракты с крупнейшими tech-компаниями. Они видят потенциал там, где другие проходят мимо.»',who:'<strong>Екатерина Л.</strong> · Технологии'},
+        {text:'«За год работы с M&K мой доход вырос в 15 раз. Это не просто менеджмент — это полноценное партнёрство, где каждый заинтересован в результате.»',who:'<strong>Игорь С.</strong> · Гейминг'}
+    ];
+    var testiCircles=document.querySelectorAll('.testi-circle');
+    var testiReveal=document.getElementById('testiReveal');
+    var testiText=document.getElementById('testiText');
+    var testiWho=document.getElementById('testiWho');
+    testiCircles.forEach(function(c){
+        c.addEventListener('click',function(){
+            var idx=parseInt(c.dataset.testi);
+            testiCircles.forEach(function(cc){cc.classList.remove('active')});
+            c.classList.add('active');
+            testiReveal.classList.remove('open');
+            setTimeout(function(){
+                testiText.textContent=testiData[idx].text;
+                testiWho.innerHTML=testiData[idx].who;
+                testiReveal.classList.add('open');
+            },300);
+        });
+    });
 
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
