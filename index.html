@@ -166,10 +166,9 @@
         .author-info{padding:20px}
         .author-name{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
         .author-niche{font-size:12px;color:var(--yellow);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
-        .author-stats{display:flex;gap:16px}
-        .author-stat{display:flex;flex-direction:column}
-        .author-stat-num{font-size:15px;font-weight:800;color:var(--white)}
-        .author-stat-lbl{font-size:10px;color:var(--w40);text-transform:uppercase;letter-spacing:.04em}
+        .author-badges{display:flex;flex-direction:column;gap:6px}
+        .author-badge{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--w60);line-height:1.3}
+        .author-badge svg{width:14px;height:14px;flex-shrink:0;fill:var(--yellow)}
         .author-placeholder{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:var(--bg)}
         .author-placeholder.ap1{background:linear-gradient(135deg,#F5C518,#FFD95A)}
         .author-placeholder.ap2{background:linear-gradient(135deg,#D4A810,#F5C518)}
@@ -277,8 +276,7 @@
             .authors-grid{grid-template-columns:1fr 1fr;gap:14px}
             .author-info{padding:14px}
             .author-name{font-size:14px}
-            .author-stats{gap:10px}
-            .author-stat-num{font-size:13px}
+            .author-badge{font-size:11px}
             .cases-grid{gap:16px}
             .case-card{padding:24px}
             .case-title{font-size:17px}
@@ -439,9 +437,9 @@
                 <div class="author-info">
                     <div class="author-name">Алексей К.</div>
                     <div class="author-niche">Лайфстайл</div>
-                    <div class="author-stats">
-                        <div class="author-stat"><span class="author-stat-num">1.2M</span><span class="author-stat-lbl">Подписчики</span></div>
-                        <div class="author-stat"><span class="author-stat-num">5M</span><span class="author-stat-lbl">Охват</span></div>
+                    <div class="author-badges">
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Топ-10 блогеров России 2025</div>
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Амбассадор 5 федеральных брендов</div>
                     </div>
                 </div>
             </div>
@@ -450,9 +448,9 @@
                 <div class="author-info">
                     <div class="author-name">Мария В.</div>
                     <div class="author-niche">Beauty & Fashion</div>
-                    <div class="author-stats">
-                        <div class="author-stat"><span class="author-stat-num">850K</span><span class="author-stat-lbl">Подписчики</span></div>
-                        <div class="author-stat"><span class="author-stat-num">3.2M</span><span class="author-stat-lbl">Охват</span></div>
+                    <div class="author-badges">
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Запуск собственной линейки косметики</div>
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Спикер Forbes Woman Club</div>
                     </div>
                 </div>
             </div>
@@ -461,9 +459,9 @@
                 <div class="author-info">
                     <div class="author-name">Дмитрий Р.</div>
                     <div class="author-niche">Бизнес</div>
-                    <div class="author-stats">
-                        <div class="author-stat"><span class="author-stat-num">620K</span><span class="author-stat-lbl">Подписчики</span></div>
-                        <div class="author-stat"><span class="author-stat-num">2.8M</span><span class="author-stat-lbl">Охват</span></div>
+                    <div class="author-badges">
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Автор курса с оборотом 12M ₽</div>
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Участник ТОП-30 Under 30</div>
                     </div>
                 </div>
             </div>
@@ -472,9 +470,9 @@
                 <div class="author-info">
                     <div class="author-name">Екатерина Л.</div>
                     <div class="author-niche">Технологии</div>
-                    <div class="author-stats">
-                        <div class="author-stat"><span class="author-stat-num">430K</span><span class="author-stat-lbl">Подписчики</span></div>
-                        <div class="author-stat"><span class="author-stat-num">1.9M</span><span class="author-stat-lbl">Охват</span></div>
+                    <div class="author-badges">
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Премия «Лучший tech-блогер»</div>
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Коллаборация с Яндекс и VK</div>
                     </div>
                 </div>
             </div>
@@ -483,9 +481,9 @@
                 <div class="author-info">
                     <div class="author-name">Игорь С.</div>
                     <div class="author-niche">Гейминг</div>
-                    <div class="author-stats">
-                        <div class="author-stat"><span class="author-stat-num">2.1M</span><span class="author-stat-lbl">Подписчики</span></div>
-                        <div class="author-stat"><span class="author-stat-num">8M</span><span class="author-stat-lbl">Охват</span></div>
+                    <div class="author-badges">
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Золотая кнопка YouTube</div>
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Организатор киберспорт-турниров</div>
                     </div>
                 </div>
             </div>
@@ -494,9 +492,9 @@
                 <div class="author-info">
                     <div class="author-name">Наталья П.</div>
                     <div class="author-niche">Развлечения</div>
-                    <div class="author-stats">
-                        <div class="author-stat"><span class="author-stat-num">780K</span><span class="author-stat-lbl">Подписчики</span></div>
-                        <div class="author-stat"><span class="author-stat-num">4.1M</span><span class="author-stat-lbl">Охват</span></div>
+                    <div class="author-badges">
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Ведущая шоу на ТВ</div>
+                        <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Лицо рекламной кампании Nike</div>
                     </div>
                 </div>
             </div>
