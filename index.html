@@ -157,6 +157,60 @@
         .calc-result-sub{font-size:13px;color:var(--w40);margin-top:8px}
         .contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 
+        /* ── AUTHORS ── */
+        .authors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .author-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:all .45s;position:relative}
+        .author-card:hover{border-color:rgba(245,197,24,.25);transform:translateY(-6px);box-shadow:0 16px 48px var(--yglow2)}
+        .author-avatar{width:100%;aspect-ratio:1;object-fit:cover;display:block;filter:grayscale(.2);transition:filter .4s}
+        .author-card:hover .author-avatar{filter:grayscale(0)}
+        .author-info{padding:20px}
+        .author-name{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+        .author-niche{font-size:12px;color:var(--yellow);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+        .author-stats{display:flex;gap:16px}
+        .author-stat{display:flex;flex-direction:column}
+        .author-stat-num{font-size:15px;font-weight:800;color:var(--white)}
+        .author-stat-lbl{font-size:10px;color:var(--w40);text-transform:uppercase;letter-spacing:.04em}
+        .author-placeholder{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:var(--bg)}
+        .author-placeholder.ap1{background:linear-gradient(135deg,#F5C518,#FFD95A)}
+        .author-placeholder.ap2{background:linear-gradient(135deg,#D4A810,#F5C518)}
+        .author-placeholder.ap3{background:linear-gradient(135deg,#FFD95A,#F5C518)}
+        .author-placeholder.ap4{background:linear-gradient(135deg,#B8920E,#D4A810)}
+        .author-placeholder.ap5{background:linear-gradient(135deg,#F5C518,#B8920E)}
+        .author-placeholder.ap6{background:linear-gradient(135deg,#FFD95A,#D4A810)}
+
+        /* ── CASES ── */
+        .cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+        .case-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:36px;transition:all .45s;position:relative;overflow:hidden}
+        .case-card::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,var(--yglow),transparent 70%);pointer-events:none;opacity:0;transition:opacity .4s}
+        .case-card:hover{border-color:rgba(245,197,24,.2);transform:translateY(-4px)}
+        .case-card:hover::before{opacity:1}
+        .case-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--yellow);background:rgba(245,197,24,.1);padding:5px 12px;border-radius:6px;margin-bottom:16px}
+        .case-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+        .case-desc{font-size:13px;color:var(--w40);line-height:1.6;margin-bottom:24px}
+        .case-metrics{display:flex;gap:24px;flex-wrap:wrap}
+        .case-metric{display:flex;flex-direction:column;gap:2px}
+        .case-metric-label{font-size:10px;color:var(--w40);text-transform:uppercase;letter-spacing:.06em}
+        .case-metric-row{display:flex;align-items:center;gap:8px}
+        .case-metric-old{font-size:14px;color:var(--w40);text-decoration:line-through}
+        .case-metric-arrow{color:var(--yellow);font-size:12px}
+        .case-metric-new{font-size:18px;font-weight:800;color:var(--yellow)}
+
+        /* ── TESTIMONIALS ── */
+        .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .testi-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:32px;transition:all .45s;position:relative}
+        .testi-card:hover{border-color:rgba(245,197,24,.15);transform:translateY(-4px);box-shadow:0 12px 40px var(--yglow2)}
+        .testi-quote-icon{font-size:40px;line-height:1;color:var(--yellow);opacity:.3;margin-bottom:12px;font-family:Georgia,serif}
+        .testi-text{font-size:14px;color:var(--w90);line-height:1.7;margin-bottom:20px;font-style:italic}
+        .testi-author{display:flex;align-items:center;gap:12px}
+        .testi-ava{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--bg)}
+        .testi-ava.ta1{background:linear-gradient(135deg,#F5C518,#FFD95A)}
+        .testi-ava.ta2{background:linear-gradient(135deg,#D4A810,#F5C518)}
+        .testi-ava.ta3{background:linear-gradient(135deg,#FFD95A,#D4A810)}
+        .testi-meta h4{font-size:14px;font-weight:700;margin-bottom:2px}
+        .testi-meta span{font-size:11px;color:var(--w40)}
+        .testi-stars{display:flex;gap:2px;margin-bottom:12px}
+        .testi-stars svg{width:14px;height:14px;fill:var(--yellow)}
+
         /* ── CTA ── */
         .cta-card{position:relative;border-radius:24px;border:1px solid var(--border);background:var(--bg2);padding:80px 40px;text-align:center;overflow:hidden}
         .cta-card::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(245,197,24,.08),transparent 70%);pointer-events:none}
@@ -192,6 +246,9 @@
             .sec-title{font-size:30px}
             .calc-card{grid-template-columns:1fr;gap:32px;padding:28px}
             .stats{grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
+            .authors-grid{grid-template-columns:1fr 1fr}
+            .cases-grid{grid-template-columns:1fr}
+            .testimonials-grid{grid-template-columns:1fr}
         }
         @media(max-width:640px){
             .wrap{padding:0 16px}
@@ -217,6 +274,18 @@
             .stat-item{padding:20px 12px}
             .stat-num{font-size:28px}
             .stat-lbl{font-size:10px}
+            .authors-grid{grid-template-columns:1fr 1fr;gap:14px}
+            .author-info{padding:14px}
+            .author-name{font-size:14px}
+            .author-stats{gap:10px}
+            .author-stat-num{font-size:13px}
+            .cases-grid{gap:16px}
+            .case-card{padding:24px}
+            .case-title{font-size:17px}
+            .case-metrics{gap:16px}
+            .testimonials-grid{gap:16px}
+            .testi-card{padding:24px}
+            .testi-text{font-size:13px}
             .calc-card{padding:20px;gap:24px}
             .calc-result-num{font-size:32px}
             .calc-result{padding:24px 16px}
@@ -349,6 +418,234 @@
             <div class="stat-item" data-anim="up" data-delay="300">
                 <div class="stat-num" data-count="3" data-suffix=" года">0</div>
                 <div class="stat-lbl">На рынке</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ── AUTHORS ── -->
+<section class="sec" id="authors">
+    <div class="wrap">
+        <div class="sec-head center" data-anim="up">
+            <div class="sec-label">Резиденты</div>
+            <h2 class="sec-title">Наши авторы</h2>
+            <p class="sec-desc">Таланты, которых мы развиваем и продюсируем</p>
+        </div>
+        <div class="authors-grid">
+            <div class="author-card" data-anim="up" data-delay="0">
+                <div class="author-placeholder ap1">A</div>
+                <div class="author-info">
+                    <div class="author-name">Алексей К.</div>
+                    <div class="author-niche">Лайфстайл</div>
+                    <div class="author-stats">
+                        <div class="author-stat"><span class="author-stat-num">1.2M</span><span class="author-stat-lbl">Подписчики</span></div>
+                        <div class="author-stat"><span class="author-stat-num">5M</span><span class="author-stat-lbl">Охват</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="author-card" data-anim="up" data-delay="100">
+                <div class="author-placeholder ap2">M</div>
+                <div class="author-info">
+                    <div class="author-name">Мария В.</div>
+                    <div class="author-niche">Beauty & Fashion</div>
+                    <div class="author-stats">
+                        <div class="author-stat"><span class="author-stat-num">850K</span><span class="author-stat-lbl">Подписчики</span></div>
+                        <div class="author-stat"><span class="author-stat-num">3.2M</span><span class="author-stat-lbl">Охват</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="author-card" data-anim="up" data-delay="200">
+                <div class="author-placeholder ap3">Д</div>
+                <div class="author-info">
+                    <div class="author-name">Дмитрий Р.</div>
+                    <div class="author-niche">Бизнес</div>
+                    <div class="author-stats">
+                        <div class="author-stat"><span class="author-stat-num">620K</span><span class="author-stat-lbl">Подписчики</span></div>
+                        <div class="author-stat"><span class="author-stat-num">2.8M</span><span class="author-stat-lbl">Охват</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="author-card" data-anim="up" data-delay="300">
+                <div class="author-placeholder ap4">E</div>
+                <div class="author-info">
+                    <div class="author-name">Екатерина Л.</div>
+                    <div class="author-niche">Технологии</div>
+                    <div class="author-stats">
+                        <div class="author-stat"><span class="author-stat-num">430K</span><span class="author-stat-lbl">Подписчики</span></div>
+                        <div class="author-stat"><span class="author-stat-num">1.9M</span><span class="author-stat-lbl">Охват</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="author-card" data-anim="up" data-delay="400">
+                <div class="author-placeholder ap5">И</div>
+                <div class="author-info">
+                    <div class="author-name">Игорь С.</div>
+                    <div class="author-niche">Гейминг</div>
+                    <div class="author-stats">
+                        <div class="author-stat"><span class="author-stat-num">2.1M</span><span class="author-stat-lbl">Подписчики</span></div>
+                        <div class="author-stat"><span class="author-stat-num">8M</span><span class="author-stat-lbl">Охват</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="author-card" data-anim="up" data-delay="500">
+                <div class="author-placeholder ap6">Н</div>
+                <div class="author-info">
+                    <div class="author-name">Наталья П.</div>
+                    <div class="author-niche">Развлечения</div>
+                    <div class="author-stats">
+                        <div class="author-stat"><span class="author-stat-num">780K</span><span class="author-stat-lbl">Подписчики</span></div>
+                        <div class="author-stat"><span class="author-stat-num">4.1M</span><span class="author-stat-lbl">Охват</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ── CASES ── -->
+<section class="sec why-bg" id="cases">
+    <div class="wrap">
+        <div class="sec-head center" data-anim="up">
+            <div class="sec-label">Результаты</div>
+            <h2 class="sec-title">Кейсы</h2>
+            <p class="sec-desc">Реальные результаты наших резидентов</p>
+        </div>
+        <div class="cases-grid">
+            <div class="case-card" data-anim="up" data-delay="0">
+                <div class="case-tag">Лайфстайл</div>
+                <h3 class="case-title">Рост с нуля до 1M за 8 месяцев</h3>
+                <p class="case-desc">Автор пришёл с 12K подписчиков и минимальной монетизацией. Мы выстроили контент-стратегию, запустили коллаборации и вывели на стабильный доход.</p>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="case-metric-label">Подписчики</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">12K</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">1.2M</span>
+                        </div>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-label">Доход / мес</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">15 000 ₽</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">850 000 ₽</span>
+                        </div>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-label">Рекламодатели</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">0</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">24</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-card" data-anim="up" data-delay="150">
+                <div class="case-tag">Бизнес</div>
+                <h3 class="case-title">Эксперт → медийная личность</h3>
+                <p class="case-desc">Бизнес-тренер с офлайн-аудиторией хотел выйти в digital. За 6 месяцев запустили YouTube-канал, подкаст и линейку обучающих продуктов.</p>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="case-metric-label">YouTube</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">0</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">620K</span>
+                        </div>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-label">Запуск курса</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">—</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">12M ₽</span>
+                        </div>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-label">Охват</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">5K</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">2.8M</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-card" data-anim="up" data-delay="300">
+                <div class="case-tag">Beauty</div>
+                <h3 class="case-title">Из блогера — в бренд</h3>
+                <p class="case-desc">Beauty-автор с лояльной аудиторией мечтала о своей линейке косметики. Мы помогли с упаковкой, продвижением и запуском собственного бренда.</p>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="case-metric-label">Свой бренд</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">Идея</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">Запуск</span>
+                        </div>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-label">Продажи / мес</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">0</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">3.5M ₽</span>
+                        </div>
+                    </div>
+                    <div class="case-metric">
+                        <span class="case-metric-label">Аудитория</span>
+                        <div class="case-metric-row">
+                            <span class="case-metric-old">200K</span>
+                            <span class="case-metric-arrow">→</span>
+                            <span class="case-metric-new">850K</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="sec" id="testimonials">
+    <div class="wrap">
+        <div class="sec-head center" data-anim="up">
+            <div class="sec-label">Доверие</div>
+            <h2 class="sec-title">Отзывы</h2>
+            <p class="sec-desc">Что говорят наши резиденты</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testi-card" data-anim="up" data-delay="0">
+                <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
+                <div class="testi-text">«Ребята реально вложились в мой рост. За полгода я вышел на уровень, о котором раньше даже не мечтал. Профессионализм на каждом этапе.»</div>
+                <div class="testi-author">
+                    <div class="testi-ava ta1">А</div>
+                    <div class="testi-meta"><h4>Алексей К.</h4><span>1.2M подписчиков · Лайфстайл</span></div>
+                </div>
+            </div>
+            <div class="testi-card" data-anim="up" data-delay="150">
+                <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
+                <div class="testi-text">«M&K — это не просто агентство, это команда, которая верит в тебя. Они помогли мне запустить собственный бренд и выйти на новый уровень дохода.»</div>
+                <div class="testi-author">
+                    <div class="testi-ava ta2">М</div>
+                    <div class="testi-meta"><h4>Мария В.</h4><span>850K подписчиков · Beauty</span></div>
+                </div>
+            </div>
+            <div class="testi-card" data-anim="up" data-delay="300">
+                <div class="testi-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
+                <div class="testi-text">«Чёткая стратегия, прозрачные условия и реальные результаты. Мой канал вырос в 10 раз за год. Рекомендую всем, кто хочет расти серьёзно.»</div>
+                <div class="testi-author">
+                    <div class="testi-ava ta3">Д</div>
+                    <div class="testi-meta"><h4>Дмитрий Р.</h4><span>620K подписчиков · Бизнес</span></div>
+                </div>
             </div>
         </div>
     </div>
