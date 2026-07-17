@@ -190,8 +190,8 @@
         .case-metric-new{font-size:18px;font-weight:800;color:var(--yellow)}
 
         /* ── TESTIMONIALS ── */
-        .testi-circles{display:flex;justify-content:center;gap:20px;margin-bottom:32px}
-        .testi-circle{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--bg);cursor:pointer;transition:all .4s;border:3px solid transparent;position:relative}
+        .testi-circles{display:flex;justify-content:center;gap:20px;margin-bottom:32px;flex-wrap:wrap;padding-bottom:8px}
+        .testi-circle{width:68px;height:68px;min-width:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--bg);cursor:pointer;transition:all .4s;border:3px solid transparent;position:relative;aspect-ratio:1}
         .testi-circle::after{content:attr(data-name);position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--w40);white-space:nowrap;font-weight:600;transition:color .3s}
         .testi-circle.active{border-color:var(--yellow);box-shadow:0 0 24px rgba(245,197,24,.4);transform:scale(1.12)}
         .testi-circle.active::after{color:var(--yellow)}
@@ -283,7 +283,8 @@
             .case-title{font-size:17px}
             .case-metrics{gap:16px}
             .testi-circles{gap:14px}
-            .testi-circle{width:56px;height:56px;font-size:20px}
+            .testi-circles{gap:12px}
+            .testi-circle{width:48px;height:48px;min-width:48px;font-size:18px}
             .testi-circle::after{font-size:10px;bottom:-18px}
             .testi-reveal-inner{padding:20px 16px}
             .testi-reveal-text{font-size:14px}
