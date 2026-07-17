@@ -167,13 +167,12 @@
         @keyframes ctaBtnPulse{0%,100%{box-shadow:0 4px 24px rgba(245,197,24,.4),0 0 0 1px rgba(245,197,24,.6)}50%{box-shadow:0 8px 32px rgba(245,197,24,.6),0 0 20px 4px rgba(245,197,24,.2),0 0 0 1px var(--yellow)}}
 
         /* AUTHORS */
-        .authors-scroll-wrap{position:relative}
-        .authors-scroll{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:16px;scrollbar-width:none}
+        .authors-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:16px}
         .authors-scroll::-webkit-scrollbar{display:none}
-        .authors-page{display:grid;grid-template-columns:1fr 1fr;gap:14px;min-width:100%;flex-shrink:0;scroll-snap-align:start}
+        .authors-page{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex-shrink:0;scroll-snap-align:start}
         .author-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:all .45s;position:relative}
-        .author-card:hover{border-color:rgba(245,197,24,.25);transform:translateY(-6px);box-shadow:0 16px 48px var(--yglow2)}
-        .author-avatar{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(.2);transition:filter .4s}
+        .author-card:hover{border-color:rgba(245,197,24,.25);box-shadow:0 16px 48px var(--yglow2)}
+        .author-avatar{width:100%;aspect-ratio:1;object-fit:cover;display:block;filter:grayscale(.2);transition:filter .4s}
         .author-card:hover .author-avatar{filter:grayscale(0)}
         .author-info{padding:20px}
         .author-name{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
@@ -190,12 +189,12 @@
         .author-detail.open .author-detail-content{opacity:1;transform:translateY(0)}
 
         .author-nda{border-radius:20px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;grid-column:1/-1}
-        .nda-icon{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--border2),var(--bg4));display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:48px;font-weight:900;color:var(--w20);border:2px solid var(--border)}
-        .nda-title{font-size:18px;font-weight:800;color:var(--w40);margin-bottom:8px}
-        .nda-text{font-size:13px;color:var(--w20);line-height:1.6}
+        .nda-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--border2),var(--bg4));display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:40px;font-weight:900;color:var(--w20);border:2px solid var(--border)}
+        .nda-title{font-size:16px;font-weight:800;color:var(--w40);margin-bottom:6px}
+        .nda-text{font-size:12px;color:var(--w20);line-height:1.5}
 
-        .scroll-hint{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;font-size:12px;color:var(--w40);animation:scrollHintPulse 2s ease-in-out infinite}
-        .scroll-hint svg{width:16px;height:16px}
+        .scroll-hint{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:var(--w40);animation:scrollHintPulse 2s ease-in-out infinite}
+        .scroll-hint svg{width:14px;height:14px}
         @keyframes scrollHintPulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:.8;transform:translateX(4px)}}
 
         /* CASES */
@@ -312,13 +311,12 @@
             .stat-num{font-size:28px}
             .stat-lbl{font-size:10px}
             .authors-page{gap:10px}
-            .author-avatar{aspect-ratio:3/4}
-            .author-info{padding:10px 12px}
-            .author-name{font-size:13px}
+            .author-info{padding:12px}
+            .author-name{font-size:14px}
             .author-niche{font-size:10px;margin-bottom:8px}
             .author-badge{font-size:10px}
             .author-badge svg{width:12px;height:12px}
-            .author-more{font-size:11px;margin-top:10px}
+            .author-more{font-size:11px;margin-top:8px}
             .author-card{border-radius:14px}
             .cases-grid{gap:16px}
             .case-card{padding:24px}
@@ -490,7 +488,7 @@
             <h2 class="sec-title">Наши авторы</h2>
             <p class="sec-desc">Таланты, которых мы развиваем и продюсируем</p>
         </div>
-        <div class="authors-scroll-wrap" data-anim="up" data-delay="100">
+        <div class="authors-scroll-wrap">
             <div class="authors-scroll" id="authorsScroll">
                 <div class="authors-page">
                     <div class="author-card">
@@ -1054,6 +1052,17 @@
         });
     },{threshold:.3});
     document.querySelectorAll('.case-growth-value').forEach(function(el){growthObs.observe(el)});
+
+    // authors page sizing
+    function sizeAuthorPages(){
+        var scroll=document.getElementById('authorsScroll');
+        if(!scroll)return;
+        var w=scroll.offsetWidth;
+        var pages=scroll.querySelectorAll('.authors-page');
+        pages.forEach(function(p){p.style.width=w+'px'});
+    }
+    sizeAuthorPages();
+    window.addEventListener('resize',sizeAuthorPages);
 
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
