@@ -195,7 +195,8 @@
         .testi-circle::after{content:attr(data-name);position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--w40);white-space:nowrap;font-weight:600;transition:color .3s}
         .testi-circle.active{border-color:var(--yellow);box-shadow:0 0 24px rgba(245,197,24,.4);transform:scale(1.12)}
         .testi-circle.active::after{color:var(--yellow)}
-        .testi-circle{background:linear-gradient(135deg,#F5C518,#FFD95A)}
+        .testi-circle{background:linear-gradient(135deg,#F5C518,#FFD95A);overflow:hidden}
+        .testi-circle img{width:100%;height:100%;object-fit:cover;border-radius:50%}
         .testi-reveal{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1)}
         .testi-reveal.open{grid-template-rows:1fr}
         .testi-reveal-wrap{overflow:hidden}
@@ -625,12 +626,12 @@
             <p class="sec-desc">Нажмите на аватар, чтобы прочитать отзыв</p>
         </div>
         <div class="testi-circles" data-anim="up" data-delay="100">
-            <div class="testi-circle active" data-testi="0" data-name="Егор">Е</div>
-            <div class="testi-circle" data-testi="1" data-name="Гигант">Г</div>
-            <div class="testi-circle" data-testi="2" data-name="Рафаэль">Р</div>
-            <div class="testi-circle" data-testi="3" data-name="Станислав">С</div>
-            <div class="testi-circle" data-testi="4" data-name="Fomobase">F</div>
-            <div class="testi-circle" data-testi="5" data-name="Надя">Н</div>
+            <div class="testi-circle active" data-testi="0" data-name="Егор"><img src="photo_2026-07-17_03-45-28.jpg" alt="Егор"></div>
+            <div class="testi-circle" data-testi="1" data-name="Гигант"><img src="photo_2026-07-17_03-51-39.jpg" alt="Гигант"></div>
+            <div class="testi-circle" data-testi="2" data-name="Рафаэль"><img src="photo_2026-07-17_03-56-12.jpg" alt="Рафаэль"></div>
+            <div class="testi-circle" data-testi="3" data-name="Станислав"><img src="photo_2026-07-17_03-58-05.jpg" alt="Станислав"></div>
+            <div class="testi-circle" data-testi="4" data-name="Fomobase"><img src="photo_2026-07-17_04-01-36.jpg" alt="Fomobase"></div>
+            <div class="testi-circle" data-testi="5" data-name="Надя"><img src="photo_2026-07-17_03-27-20.jpg" alt="Надя"></div>
         </div>
         <div id="testiReveal" class="testi-reveal open" data-anim="fade">
             <div class="testi-reveal-wrap"><div class="testi-reveal-inner">
