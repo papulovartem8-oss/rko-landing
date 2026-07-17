@@ -214,11 +214,12 @@
         .case-metric-arrow{color:var(--yellow);font-size:12px}
         .case-metric-new{font-size:18px;font-weight:800;color:var(--yellow)}
 
-        .case-chart{display:flex;align-items:flex-end;gap:6px;height:60px;margin-top:20px;padding-top:12px;border-top:1px solid var(--border)}
-        .case-bar{flex:1;border-radius:4px 4px 0 0;transition:height 1s cubic-bezier(.4,0,.2,1);position:relative}
-        .case-bar.before{background:var(--border2);height:0}
-        .case-bar.after{background:linear-gradient(180deg,var(--yellow),var(--yellow3));height:0}
-        .case-chart-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--w40);margin-top:4px}
+        .case-growth{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+        .case-growth-icon{width:40px;height:40px;border-radius:12px;background:rgba(245,197,24,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .case-growth-icon svg{width:20px;height:20px}
+        .case-growth-value{font-size:28px;font-weight:900;color:var(--yellow);letter-spacing:-.03em;opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
+        .case-growth-value.vis{opacity:1;transform:translateY(0)}
+        .case-growth-label{font-size:11px;color:var(--w40);margin-top:2px}
 
         .case-more-link{display:inline-block;margin-top:16px;font-size:13px;color:var(--yellow);font-weight:600;cursor:pointer;transition:opacity .3s}
         .case-more-link:hover{opacity:.7}
@@ -230,13 +231,12 @@
 
         /* TESTIMONIALS */
         .testi-carousel-wrap{overflow:hidden;position:relative;padding:10px 0}
-        .testi-carousel-wrap::before,.testi-carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+        .testi-carousel-wrap::before,.testi-carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:40px;z-index:2;pointer-events:none}
         .testi-carousel-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
         .testi-carousel-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
-        .testi-track{display:flex;gap:20px;animation:testiScroll 30s linear infinite;width:max-content}
-        .testi-track:hover{animation-play-state:paused}
-        @keyframes testiScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        .testi-card{min-width:320px;max-width:320px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:24px;flex-shrink:0;transition:border-color .3s,box-shadow .3s}
+        .testi-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 28px;scrollbar-width:none}
+        .testi-track::-webkit-scrollbar{display:none}
+        .testi-card{min-width:320px;max-width:320px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:24px;flex-shrink:0;transition:border-color .3s,box-shadow .3s;scroll-snap-align:start}
         .testi-card:hover{border-color:rgba(245,197,24,.2);box-shadow:0 8px 32px var(--yglow2)}
         .testi-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
         .testi-card-avatar{width:44px;height:44px;min-width:44px;border-radius:50%;overflow:hidden;border:2px solid var(--yellow3)}
@@ -632,11 +632,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="case-chart" data-bars="12,1200">
-                    <div class="case-bar before"></div>
-                    <div class="case-bar after"></div>
+                <div class="case-growth">
+                    <div class="case-growth-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+                    <div><div class="case-growth-value" data-growth="+9 900%">+9 900%</div><div class="case-growth-label">рост подписчиков</div></div>
                 </div>
-                <div class="case-chart-labels"><span>До</span><span>После</span></div>
                 <span class="case-more-link" onclick="toggleCase(this)">Подробнее &rarr;</span>
                 <div class="case-expand">
                     <div class="case-expand-inner"><div class="case-expand-content">Работа началась с аудита контента и анализа конкурентов. Мы пересобрали контент-план, внедрили систему рекламных интеграций и вывели автора на ежемесячные коллаборации с крупными брендами. За 8 месяцев аудитория выросла в 100 раз, а доход стабилизировался на уровне 850K+/мес.</div></div>
@@ -672,11 +671,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="case-chart" data-bars="5,2800">
-                    <div class="case-bar before"></div>
-                    <div class="case-bar after"></div>
+                <div class="case-growth">
+                    <div class="case-growth-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+                    <div><div class="case-growth-value" data-growth="+55 900%">+55 900%</div><div class="case-growth-label">рост охватов</div></div>
                 </div>
-                <div class="case-chart-labels"><span>До</span><span>После</span></div>
                 <span class="case-more-link" onclick="toggleCase(this)">Подробнее &rarr;</span>
                 <div class="case-expand">
                     <div class="case-expand-inner"><div class="case-expand-content">Мы провели глубокий анализ ниши, разработали формат для YouTube, запустили подкаст и создали линейку обучающих продуктов. Первый запуск курса принёс 12M рублей. Охваты выросли с 5K до 2.8M, а эксперт стал узнаваемой медийной личностью в своей нише.</div></div>
@@ -712,11 +710,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="case-chart" data-bars="200,850">
-                    <div class="case-bar before"></div>
-                    <div class="case-bar after"></div>
+                <div class="case-growth">
+                    <div class="case-growth-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+                    <div><div class="case-growth-value" data-growth="+325%">+325%</div><div class="case-growth-label">рост аудитории</div></div>
                 </div>
-                <div class="case-chart-labels"><span>До</span><span>После</span></div>
                 <span class="case-more-link" onclick="toggleCase(this)">Подробнее &rarr;</span>
                 <div class="case-expand">
                     <div class="case-expand-inner"><div class="case-expand-content">Помогли создать собственный бренд косметики: от разработки концепции и упаковки до маркетинговой стратегии запуска. Аудитория выросла с 200K до 850K, а ежемесячные продажи бренда достигли 3.5M рублей. Контент-стратегия встроена в воронку продаж.</div></div>
@@ -1038,28 +1035,16 @@
     themeSelect.addEventListener('change',updateCalc);
     updateCalc();
 
-    // testimonials — duplicate track for infinite scroll
-    var track=document.getElementById('testiTrack');
-    var cards=track.innerHTML;
-    track.innerHTML=cards+cards;
-
-    // case charts animation
-    var chartObs=new IntersectionObserver(function(entries){
+    // case growth animation
+    var growthObs=new IntersectionObserver(function(entries){
         entries.forEach(function(e){
             if(e.isIntersecting){
-                var bars=e.target.dataset.bars.split(',');
-                var b=parseInt(bars[0]),a=parseInt(bars[1]);
-                var max=Math.max(b,a);
-                var bPct=Math.max((b/max)*100,5);
-                var aPct=(a/max)*100;
-                var children=e.target.children;
-                setTimeout(function(){children[0].style.height=bPct+'%'},100);
-                setTimeout(function(){children[1].style.height=aPct+'%'},300);
-                chartObs.unobserve(e.target);
+                e.target.classList.add('vis');
+                growthObs.unobserve(e.target);
             }
         });
     },{threshold:.3});
-    document.querySelectorAll('.case-chart').forEach(function(el){chartObs.observe(el)});
+    document.querySelectorAll('.case-growth-value').forEach(function(el){growthObs.observe(el)});
 
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
