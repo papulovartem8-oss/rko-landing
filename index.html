@@ -170,7 +170,7 @@
         .authors-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:16px}
         .authors-scroll::-webkit-scrollbar{display:none}
         .authors-page{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex-shrink:0;scroll-snap-align:start}
-        .author-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:all .45s;position:relative}
+        .author-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:all .45s;position:relative;cursor:pointer}
         .author-card:hover{border-color:rgba(245,197,24,.25);box-shadow:0 16px 48px var(--yglow2)}
         .author-avatar{width:100%;aspect-ratio:1;object-fit:cover;display:block;filter:grayscale(.2);transition:filter .4s}
         .author-card:hover .author-avatar{filter:grayscale(0)}
@@ -182,11 +182,24 @@
         .author-badge svg{width:14px;height:14px;flex-shrink:0;fill:var(--yellow)}
         .author-more{display:block;margin-top:14px;font-size:13px;color:var(--yellow);font-weight:600;cursor:pointer;transition:opacity .3s;text-decoration:none}
         .author-more:hover{opacity:.7}
-        .author-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.4,0,.2,1)}
-        .author-detail.open{grid-template-rows:1fr}
-        .author-detail-inner{overflow:hidden}
-        .author-detail-content{padding:14px 20px 20px;font-size:12px;color:var(--w60);line-height:1.6;border-top:1px solid var(--border);opacity:0;transform:translateY(-6px);transition:opacity .3s .15s,transform .3s .15s}
-        .author-detail.open .author-detail-content{opacity:1;transform:translateY(0)}
+
+        /* AUTHOR MODAL */
+        .author-modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+        .author-modal-overlay.open{opacity:1;visibility:visible}
+        .author-modal{width:100%;max-width:400px;max-height:85vh;overflow-y:auto;border-radius:24px;border:1px solid var(--border);background:var(--bg2);position:relative;transform:scale(.9) translateY(20px);transition:transform .4s cubic-bezier(.4,0,.2,1);scrollbar-width:none}
+        .author-modal::-webkit-scrollbar{display:none}
+        .author-modal-overlay.open .author-modal{transform:scale(1) translateY(0)}
+        .author-modal-close{position:absolute;top:12px;right:12px;z-index:5;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--white);transition:all .3s}
+        .author-modal-close:hover{background:rgba(245,197,24,.2);border-color:var(--yellow)}
+        .author-modal-close svg{width:18px;height:18px}
+        .author-modal-img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+        .author-modal-body{padding:24px}
+        .author-modal-name{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+        .author-modal-niche{font-size:12px;color:var(--yellow);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px}
+        .author-modal-badges{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+        .author-modal-badge{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--w60);line-height:1.4}
+        .author-modal-badge svg{width:16px;height:16px;flex-shrink:0;fill:var(--yellow)}
+        .author-modal-desc{font-size:14px;color:var(--w40);line-height:1.7;padding-top:16px;border-top:1px solid var(--border)}
 
         .author-nda{border-radius:20px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;grid-column:1/-1}
         .nda-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--border2),var(--bg4));display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:40px;font-weight:900;color:var(--w20);border:2px solid var(--border)}
@@ -495,7 +508,7 @@
         <div class="authors-scroll-wrap">
             <div class="authors-scroll" id="authorsScroll">
                 <div class="authors-page">
-                    <div class="author-card">
+                    <div class="author-card" onclick="openAuthorModal(0)">
                         <img src="photo_2026-07-17_03-45-28.jpg" alt="Егор Румянцев" class="author-avatar">
                         <div class="author-info">
                             <div class="author-name">Егор Румянцев</div>
@@ -504,13 +517,10 @@
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Развитие каналов в TG, MAX</div>
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Успешные запуски команды РКО</div>
                             </div>
-                            <span class="author-more" onclick="toggleAuthor(this)">Подробнее &rarr;</span>
-                        </div>
-                        <div class="author-detail">
-                            <div class="author-detail-inner"><div class="author-detail-content">Егор — один из ключевых авторов продакшена. Развивает сеть каналов в Telegram и MAX, выстраивает команды для работы с рекламой и монетизацией. Участвовал в запуске множества проектов в рамках РКО.</div></div>
+                            <span class="author-more">Подробнее &rarr;</span>
                         </div>
                     </div>
-                    <div class="author-card">
+                    <div class="author-card" onclick="openAuthorModal(1)">
                         <img src="photo_2026-07-17_03-51-39.jpg" alt="Gigant" class="author-avatar">
                         <div class="author-info">
                             <div class="author-name">Gigant</div>
@@ -519,13 +529,10 @@
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>5 000 000 подписчиков в новостях</div>
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Запуск обучения в Telegram</div>
                             </div>
-                            <span class="author-more" onclick="toggleAuthor(this)">Подробнее &rarr;</span>
-                        </div>
-                        <div class="author-detail">
-                            <div class="author-detail-inner"><div class="author-detail-content">Gigant — крупнейший новостной автор в экосистеме. Управляет сетью каналов с совокупной аудиторией более 5 миллионов подписчиков. Запустил собственное обучение по созданию и управлению новостными каналами.</div></div>
+                            <span class="author-more">Подробнее &rarr;</span>
                         </div>
                     </div>
-                    <div class="author-card">
+                    <div class="author-card" onclick="openAuthorModal(2)">
                         <img src="photo_2026-07-17_03-56-12.jpg" alt="Рафаэль Рагимов" class="author-avatar">
                         <div class="author-info">
                             <div class="author-name">Рафаэль Рагимов</div>
@@ -534,13 +541,10 @@
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Академия на 350 админов в Telegram</div>
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Команда РКО на 250 человек</div>
                             </div>
-                            <span class="author-more" onclick="toggleAuthor(this)">Подробнее &rarr;</span>
-                        </div>
-                        <div class="author-detail">
-                            <div class="author-detail-inner"><div class="author-detail-content">Рафаэль построил крупнейшую академию по закупке рекламы в Telegram — 350 активных админов. Руководит командой из 250 человек в рамках РКО, которая взаимодействует с крупнейшими банками России.</div></div>
+                            <span class="author-more">Подробнее &rarr;</span>
                         </div>
                     </div>
-                    <div class="author-card">
+                    <div class="author-card" onclick="openAuthorModal(3)">
                         <img src="photo_2026-07-17_03-58-05.jpg" alt="Станислав Хайп" class="author-avatar">
                         <div class="author-info">
                             <div class="author-name">Станислав Хайп</div>
@@ -549,13 +553,10 @@
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>VPN-сервис на 1 000 000+ пользователей</div>
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Команда по РКО на 200 человек</div>
                             </div>
-                            <span class="author-more" onclick="toggleAuthor(this)">Подробнее &rarr;</span>
-                        </div>
-                        <div class="author-detail">
-                            <div class="author-detail-inner"><div class="author-detail-content">Станислав создал VPN-сервис с аудиторией более миллиона пользователей. Управляет командой из 200 человек в направлении РКО. Эксперт в масштабировании tech-продуктов через инфлюенс-маркетинг.</div></div>
+                            <span class="author-more">Подробнее &rarr;</span>
                         </div>
                     </div>
-                    <div class="author-card">
+                    <div class="author-card" onclick="openAuthorModal(4)">
                         <img src="photo_2026-07-17_04-01-36.jpg" alt="Fomobase" class="author-avatar">
                         <div class="author-info">
                             <div class="author-name">Fomobase</div>
@@ -564,13 +565,10 @@
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>20 000 подписчиков YouTube</div>
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>100+ участников в команде РКО</div>
                             </div>
-                            <span class="author-more" onclick="toggleAuthor(this)">Подробнее &rarr;</span>
-                        </div>
-                        <div class="author-detail">
-                            <div class="author-detail-inner"><div class="author-detail-content">Fomobase — крипто-инфлюенсер с активным YouTube-каналом и собственным комьюнити. Объединил более 100 участников в команде РКО, специализируется на контенте и образовании в сфере криптовалют.</div></div>
+                            <span class="author-more">Подробнее &rarr;</span>
                         </div>
                     </div>
-                    <div class="author-card">
+                    <div class="author-card" onclick="openAuthorModal(5)">
                         <img src="photo_2026-07-17_03-27-20.jpg" alt="Надежда Павлова" class="author-avatar">
                         <div class="author-info">
                             <div class="author-name">Надежда Павлова</div>
@@ -579,10 +577,7 @@
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Международная модель, работа с брендами</div>
                                 <div class="author-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>Совокупная аудитория ~1 000 000</div>
                             </div>
-                            <span class="author-more" onclick="toggleAuthor(this)">Подробнее &rarr;</span>
-                        </div>
-                        <div class="author-detail">
-                            <div class="author-detail-inner"><div class="author-detail-content">Надежда — международная модель с совокупной аудиторией около миллиона человек. Работает с крупными брендами, выстроила систему монетизации блога, где контент напрямую работает на продажи.</div></div>
+                            <span class="author-more">Подробнее &rarr;</span>
                         </div>
                     </div>
                 </div>
@@ -874,6 +869,20 @@
     </div>
 </footer>
 
+<!-- AUTHOR MODAL -->
+<div class="author-modal-overlay" id="authorModal" onclick="if(event.target===this)closeAuthorModal()">
+    <div class="author-modal">
+        <button class="author-modal-close" onclick="closeAuthorModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        <img class="author-modal-img" id="authorModalImg" src="" alt="">
+        <div class="author-modal-body">
+            <div class="author-modal-name" id="authorModalName"></div>
+            <div class="author-modal-niche" id="authorModalNiche"></div>
+            <div class="author-modal-badges" id="authorModalBadges"></div>
+            <div class="author-modal-desc" id="authorModalDesc"></div>
+        </div>
+    </div>
+</div>
+
 <a href="https://t.me/excellent_g" target="_blank" rel="noopener" class="sticky-tg" id="stickyTg">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg>
     Написать нам
@@ -1094,17 +1103,31 @@ function toggleStep(el){
     }
 }
 
-// author toggle
-function toggleAuthor(el){
-    var card=el.closest('.author-card');
-    var detail=card.querySelector('.author-detail');
-    if(detail.classList.contains('open')){
-        detail.classList.remove('open');
-        el.innerHTML='Подробнее &rarr;';
-    }else{
-        detail.classList.add('open');
-        el.innerHTML='Свернуть &larr;';
-    }
+// author modal
+var authorData=[
+{name:'Егор Румянцев',niche:'TG · MAX · РКО',img:'photo_2026-07-17_03-45-28.jpg',badges:['Развитие каналов в TG, MAX','Успешные запуски команды РКО'],desc:'Егор — один из ключевых авторов продакшена. Развивает сеть каналов в Telegram и MAX, выстраивает команды для работы с рекламой и монетизацией. Участвовал в запуске множества проектов в рамках РКО.'},
+{name:'Gigant',niche:'Новости',img:'photo_2026-07-17_03-51-39.jpg',badges:['5 000 000 подписчиков в новостях','Запуск обучения в Telegram'],desc:'Gigant — крупнейший новостной автор в экосистеме. Управляет сетью каналов с совокупной аудиторией более 5 миллионов подписчиков. Запустил собственное обучение по созданию и управлению новостными каналами.'},
+{name:'Рафаэль Рагимов',niche:'Закупы · РКО',img:'photo_2026-07-17_03-56-12.jpg',badges:['Академия на 350 админов в Telegram','Команда РКО на 250 человек'],desc:'Рафаэль построил крупнейшую академию по закупке рекламы в Telegram — 350 активных админов. Руководит командой из 250 человек в рамках РКО, которая взаимодействует с крупнейшими банками России.'},
+{name:'Станислав Хайп',niche:'VPN · РКО',img:'photo_2026-07-17_03-58-05.jpg',badges:['VPN-сервис на 1 000 000+ пользователей','Команда по РКО на 200 человек'],desc:'Станислав создал VPN-сервис с аудиторией более миллиона пользователей. Управляет командой из 200 человек в направлении РКО. Эксперт в масштабировании tech-продуктов через инфлюенс-маркетинг.'},
+{name:'Fomobase',niche:'Крипто · YouTube',img:'photo_2026-07-17_04-01-36.jpg',badges:['20 000 подписчиков YouTube','100+ участников в команде РКО'],desc:'Fomobase — крипто-инфлюенсер с активным YouTube-каналом и собственным комьюнити. Объединил более 100 участников в команде РКО, специализируется на контенте и образовании в сфере криптовалют.'},
+{name:'Надежда Павлова',niche:'Модель · Бренды',img:'photo_2026-07-17_03-27-20.jpg',badges:['Международная модель, работа с брендами','Совокупная аудитория ~1 000 000'],desc:'Надежда — международная модель с совокупной аудиторией около миллиона человек. Работает с крупными брендами, выстроила систему монетизации блога, где контент напрямую работает на продажи.'}
+];
+function openAuthorModal(idx){
+    var a=authorData[idx];if(!a)return;
+    document.getElementById('authorModalImg').src=a.img;
+    document.getElementById('authorModalImg').alt=a.name;
+    document.getElementById('authorModalName').textContent=a.name;
+    document.getElementById('authorModalNiche').textContent=a.niche;
+    var badgesHtml='';
+    a.badges.forEach(function(b){badgesHtml+='<div class="author-modal-badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg>'+b+'</div>';});
+    document.getElementById('authorModalBadges').innerHTML=badgesHtml;
+    document.getElementById('authorModalDesc').textContent=a.desc;
+    document.getElementById('authorModal').classList.add('open');
+    document.body.style.overflow='hidden';
+}
+function closeAuthorModal(){
+    document.getElementById('authorModal').classList.remove('open');
+    document.body.style.overflow='';
 }
 
 // case toggle
