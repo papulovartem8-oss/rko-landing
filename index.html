@@ -196,6 +196,10 @@
         .scroll-hint{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:var(--w40);animation:scrollHintPulse 2s ease-in-out infinite}
         .scroll-hint svg{width:14px;height:14px}
         @keyframes scrollHintPulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:.8;transform:translateX(4px)}}
+        .authors-arrows{display:flex;justify-content:center;gap:12px;margin-top:16px}
+        .authors-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;color:var(--w40)}
+        .authors-arrow:hover{border-color:var(--yellow);color:var(--yellow);box-shadow:0 0 16px var(--yglow)}
+        .authors-arrow svg{width:18px;height:18px}
 
         /* CASES */
         .cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
@@ -590,9 +594,9 @@
                     </div>
                 </div>
             </div>
-            <div class="scroll-hint">
-                <span>Листайте</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div class="authors-arrows">
+                <button class="authors-arrow" onclick="scrollAuthors(-1)" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+                <button class="authors-arrow" onclick="scrollAuthors(1)" aria-label="Вперёд"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
             </div>
         </div>
     </div>
@@ -1053,7 +1057,7 @@
     },{threshold:.3});
     document.querySelectorAll('.case-growth-value').forEach(function(el){growthObs.observe(el)});
 
-    // authors page sizing
+    // authors page sizing + scroll
     function sizeAuthorPages(){
         var scroll=document.getElementById('authorsScroll');
         if(!scroll)return;
@@ -1063,6 +1067,13 @@
     }
     sizeAuthorPages();
     window.addEventListener('resize',sizeAuthorPages);
+
+    window.scrollAuthors=function(dir){
+        var scroll=document.getElementById('authorsScroll');
+        if(!scroll)return;
+        var pageW=scroll.offsetWidth+16;
+        scroll.scrollBy({left:dir*pageW,behavior:'smooth'});
+    };
 
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
