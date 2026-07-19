@@ -251,7 +251,7 @@
         .testi-carousel-wrap::before,.testi-carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:40px;z-index:2;pointer-events:none}
         .testi-carousel-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
         .testi-carousel-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
-        .testi-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:none;-webkit-overflow-scrolling:touch;padding:0 28px;scrollbar-width:none;overscroll-behavior-inline:contain;cursor:grab}
+        .testi-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:none;-webkit-overflow-scrolling:touch;padding:0 28px;scrollbar-width:none;overscroll-behavior-inline:contain;touch-action:pan-y;user-select:none;cursor:grab}
         .testi-track::-webkit-scrollbar{display:none}
         .testi-track.is-interacting{cursor:grabbing}
         .testi-card{min-width:320px;max-width:320px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:24px;flex-shrink:0;transition:border-color .3s,box-shadow .3s;scroll-snap-align:start}
@@ -1110,6 +1110,9 @@
         var testiPosition=0;
         var testiPaused=false;
         var testiResume=null;
+        var testiDragging=false;
+        var testiDragStartX=0;
+        var testiDragStartScroll=0;
         var lastFrame=performance.now();
         var speed=18; // pixels per second
 
@@ -1169,9 +1172,34 @@
             },delay);
         }
 
-        testiTrack.addEventListener('pointerdown',pauseTestiAuto,{passive:true});
-        window.addEventListener('pointerup',function(){resumeTestiAuto(1600)},{passive:true});
-        window.addEventListener('pointercancel',function(){resumeTestiAuto(1600)},{passive:true});
+        testiTrack.addEventListener('pointerdown',function(event){
+            pauseTestiAuto();
+            testiDragging=true;
+            testiDragStartX=event.clientX;
+            testiDragStartScroll=testiTrack.scrollLeft;
+            if(event.pointerType==='mouse')testiTrack.setPointerCapture(event.pointerId);
+        },{passive:true});
+        testiTrack.addEventListener('pointermove',function(event){
+            if(!testiDragging)return;
+            var distance=event.clientX-testiDragStartX;
+            if(Math.abs(distance)>2){
+                testiTrack.scrollLeft=testiDragStartScroll-distance;
+                testiPosition=testiTrack.scrollLeft;
+                if(event.cancelable)event.preventDefault();
+            }
+        },{passive:false});
+        function finishTestiDrag(event){
+            if(!testiDragging)return;
+            testiDragging=false;
+            if(event.pointerType==='mouse' && testiTrack.hasPointerCapture(event.pointerId)){
+                testiTrack.releasePointerCapture(event.pointerId);
+            }
+            normalizeTestiPosition();
+            testiPosition=testiTrack.scrollLeft;
+            resumeTestiAuto(1600);
+        }
+        window.addEventListener('pointerup',finishTestiDrag,{passive:true});
+        window.addEventListener('pointercancel',finishTestiDrag,{passive:true});
         testiTrack.addEventListener('wheel',function(){
             pauseTestiAuto();
             resumeTestiAuto(1600);
