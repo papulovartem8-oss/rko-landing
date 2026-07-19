@@ -251,10 +251,9 @@
         .testi-carousel-wrap::before,.testi-carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:40px;z-index:2;pointer-events:none}
         .testi-carousel-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
         .testi-carousel-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
-        .testi-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 28px;scrollbar-width:none}
+        .testi-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:none;-webkit-overflow-scrolling:touch;padding:0 28px;scrollbar-width:none;overscroll-behavior-inline:contain;cursor:grab}
         .testi-track::-webkit-scrollbar{display:none}
-        .testi-track.is-interacting{scroll-snap-type:none}
-        .testi-track.is-autoplaying{scroll-snap-type:none}
+        .testi-track.is-interacting{cursor:grabbing}
         .testi-card{min-width:320px;max-width:320px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:24px;flex-shrink:0;transition:border-color .3s,box-shadow .3s;scroll-snap-align:start}
         .testi-card:hover{border-color:rgba(245,197,24,.2);box-shadow:0 8px 32px var(--yglow2)}
         .testi-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
@@ -1089,41 +1088,95 @@
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
 
-    // testimonials: reliable slow autoplay with full manual touch control
+    // testimonials: seamless slow autoplay with native touch scrolling
     var testiTrack=document.getElementById('testiTrack');
     if(testiTrack){
-        var testiResume=null;
+        var originals=Array.from(testiTrack.querySelectorAll('.testi-card'));
+        var before=document.createDocumentFragment();
+        var after=document.createDocumentFragment();
+        originals.forEach(function(card){
+            var beforeClone=card.cloneNode(true);
+            var afterClone=card.cloneNode(true);
+            beforeClone.setAttribute('aria-hidden','true');
+            afterClone.setAttribute('aria-hidden','true');
+            before.appendChild(beforeClone);
+            after.appendChild(afterClone);
+        });
+        testiTrack.insertBefore(before,testiTrack.firstChild);
+        testiTrack.appendChild(after);
+
+        var cycleWidth=0;
+        var cycleStart=0;
         var testiPaused=false;
-        testiTrack.classList.add('is-autoplaying');
-        var testiAuto=setInterval(function(){
-            if(!testiPaused && testiTrack.scrollWidth>testiTrack.clientWidth){
-                var card=testiTrack.querySelector('.testi-card');
-                var step=card ? card.getBoundingClientRect().width+20 : testiTrack.clientWidth;
-                var maxScroll=testiTrack.scrollWidth-testiTrack.clientWidth;
-                if(testiTrack.scrollLeft+step>=maxScroll-2){
-                    testiTrack.scrollTo({left:0,behavior:'smooth'});
-                }else{
-                    testiTrack.scrollBy({left:step,behavior:'smooth'});
-                }
+        var testiResume=null;
+        var lastFrame=performance.now();
+        var speed=18; // pixels per second
+
+        function measureTestiTrack(){
+            var allCards=testiTrack.querySelectorAll('.testi-card');
+            var firstOriginal=allCards[originals.length];
+            var firstAfter=allCards[originals.length*2];
+            var paddingLeft=parseFloat(getComputedStyle(testiTrack).paddingLeft)||0;
+            cycleStart=firstOriginal.offsetLeft-paddingLeft;
+            cycleWidth=firstAfter.offsetLeft-firstOriginal.offsetLeft;
+            if(!testiTrack.dataset.positioned){
+                testiTrack.scrollLeft=cycleStart;
+                testiTrack.dataset.positioned='true';
             }
-        },5000);
+        }
+
+        function normalizeTestiPosition(){
+            if(!cycleWidth)return;
+            while(testiTrack.scrollLeft>=cycleStart+cycleWidth){
+                testiTrack.scrollLeft-=cycleWidth;
+            }
+            while(testiTrack.scrollLeft<=cycleStart-cycleWidth){
+                testiTrack.scrollLeft+=cycleWidth;
+            }
+        }
+
+        function animateTestiTrack(now){
+            normalizeTestiPosition();
+            if(!testiPaused && !document.hidden){
+                var elapsed=Math.min(now-lastFrame,50);
+                testiTrack.scrollLeft+=speed*elapsed/1000;
+            }
+            lastFrame=now;
+            requestAnimationFrame(animateTestiTrack);
+        }
+
         function pauseTestiAuto(){
             testiPaused=true;
             testiTrack.classList.add('is-interacting');
             clearTimeout(testiResume);
+        }
+
+        function resumeTestiAuto(delay){
+            clearTimeout(testiResume);
             testiResume=setTimeout(function(){
                 testiPaused=false;
                 testiTrack.classList.remove('is-interacting');
-            },2800);
+                lastFrame=performance.now();
+            },delay);
         }
-        ['touchstart','pointerdown','wheel'].forEach(function(eventName){
-            testiTrack.addEventListener(eventName,pauseTestiAuto,{passive:true});
-        });
-        testiTrack.addEventListener('mouseenter',function(){testiPaused=true},{passive:true});
-        testiTrack.addEventListener('mouseleave',function(){
-            clearTimeout(testiResume);
-            testiResume=setTimeout(function(){testiPaused=false},1800);
+
+        testiTrack.addEventListener('pointerdown',pauseTestiAuto,{passive:true});
+        window.addEventListener('pointerup',function(){resumeTestiAuto(1600)},{passive:true});
+        window.addEventListener('pointercancel',function(){resumeTestiAuto(1600)},{passive:true});
+        testiTrack.addEventListener('wheel',function(){
+            pauseTestiAuto();
+            resumeTestiAuto(1600);
         },{passive:true});
+        testiTrack.addEventListener('mouseenter',function(){
+            if(window.matchMedia('(hover:hover)').matches)pauseTestiAuto();
+        },{passive:true});
+        testiTrack.addEventListener('mouseleave',function(){
+            if(window.matchMedia('(hover:hover)').matches)resumeTestiAuto(800);
+        },{passive:true});
+        window.addEventListener('resize',measureTestiTrack);
+
+        measureTestiTrack();
+        requestAnimationFrame(animateTestiTrack);
     }
 })();
 
