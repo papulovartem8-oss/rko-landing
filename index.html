@@ -251,9 +251,9 @@
         .testi-carousel-wrap::before,.testi-carousel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:40px;z-index:2;pointer-events:none}
         .testi-carousel-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
         .testi-carousel-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
-        .testi-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:none;-webkit-overflow-scrolling:touch;padding:0 28px;scrollbar-width:none;overscroll-behavior-inline:contain;touch-action:pan-y;user-select:none;cursor:grab}
-        .testi-track::-webkit-scrollbar{display:none}
+        .testi-track{overflow:hidden;touch-action:pan-y;user-select:none;cursor:grab}
         .testi-track.is-interacting{cursor:grabbing}
+        .testi-belt{display:flex;gap:20px;width:max-content;padding:0 28px;will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden}
         .testi-card{min-width:320px;max-width:320px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:24px;flex-shrink:0;transition:border-color .3s,box-shadow .3s;scroll-snap-align:start}
         .testi-card:hover{border-color:rgba(245,197,24,.2);box-shadow:0 8px 32px var(--yglow2)}
         .testi-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
@@ -743,6 +743,7 @@
     </div>
     <div class="testi-carousel-wrap" data-anim="fade">
         <div class="testi-track" id="testiTrack">
+          <div class="testi-belt" id="testiBelt">
             <div class="testi-card">
                 <div class="testi-card-header">
                     <div class="testi-card-avatar"><img src="photo_2026-07-17_03-45-28.jpg" alt="Егор Румянцев"></div>
@@ -791,6 +792,7 @@
                 <div class="testi-card-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.17H19l-5.3 4.06L15.78 18 10 13.94 4.22 18l2.08-6.77L1 7.17h6.61z"/></svg></div>
                 <div class="testi-card-text">«Раньше блог существовал отдельно от заработка. Теперь это единая система — контент работает на продажи, а не просто "для охватов".»</div>
             </div>
+        </div>
         </div>
     </div>
 </section>
@@ -1088,10 +1090,11 @@
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
 
-    // testimonials: seamless slow autoplay with native touch scrolling
+    // testimonials: GPU-smooth infinite belt with direct drag and inertia
     var testiTrack=document.getElementById('testiTrack');
-    if(testiTrack){
-        var originals=Array.from(testiTrack.querySelectorAll('.testi-card'));
+    var testiBelt=document.getElementById('testiBelt');
+    if(testiTrack && testiBelt){
+        var originals=Array.from(testiBelt.querySelectorAll('.testi-card'));
         var before=document.createDocumentFragment();
         var after=document.createDocumentFragment();
         originals.forEach(function(card){
@@ -1102,114 +1105,134 @@
             before.appendChild(beforeClone);
             after.appendChild(afterClone);
         });
-        testiTrack.insertBefore(before,testiTrack.firstChild);
-        testiTrack.appendChild(after);
+        testiBelt.insertBefore(before,testiBelt.firstChild);
+        testiBelt.appendChild(after);
 
         var cycleWidth=0;
-        var cycleStart=0;
+        var cycleOrigin=0;
         var testiPosition=0;
-        var testiPaused=false;
-        var testiResume=null;
+        var testiPointerActive=false;
         var testiDragging=false;
-        var testiDragStartX=0;
-        var testiDragStartScroll=0;
+        var testiAxis='';
+        var testiPointerId=null;
+        var testiStartX=0;
+        var testiStartY=0;
+        var testiLastX=0;
+        var testiLastMove=0;
+        var testiVelocity=0;
         var lastFrame=performance.now();
-        var speed=18; // pixels per second
-
-        function measureTestiTrack(){
-            var allCards=testiTrack.querySelectorAll('.testi-card');
-            var firstOriginal=allCards[originals.length];
-            var firstAfter=allCards[originals.length*2];
-            var paddingLeft=parseFloat(getComputedStyle(testiTrack).paddingLeft)||0;
-            cycleStart=firstOriginal.offsetLeft-paddingLeft;
-            cycleWidth=firstAfter.offsetLeft-firstOriginal.offsetLeft;
-            if(!testiTrack.dataset.positioned){
-                testiTrack.scrollLeft=cycleStart;
-                testiPosition=cycleStart;
-                testiTrack.dataset.positioned='true';
-            }else{
-                testiPosition=testiTrack.scrollLeft;
-            }
-        }
+        var speed=32; // pixels per second
 
         function normalizeTestiPosition(){
             if(!cycleWidth)return;
-            while(testiTrack.scrollLeft>=cycleStart+cycleWidth){
-                testiTrack.scrollLeft-=cycleWidth;
+            while(testiPosition<=cycleOrigin-cycleWidth)testiPosition+=cycleWidth;
+            while(testiPosition>=cycleOrigin+cycleWidth)testiPosition-=cycleWidth;
+        }
+
+        function renderTestiTrack(){
+            testiBelt.style.transform='translate3d('+testiPosition.toFixed(3)+'px,0,0)';
+        }
+
+        function measureTestiTrack(){
+            var allCards=testiBelt.querySelectorAll('.testi-card');
+            var firstOriginal=allCards[originals.length];
+            var firstAfter=allCards[originals.length*2];
+            var paddingLeft=parseFloat(getComputedStyle(testiBelt).paddingLeft)||0;
+            var oldWidth=cycleWidth;
+            var oldOrigin=cycleOrigin;
+            var newWidth=firstAfter.offsetLeft-firstOriginal.offsetLeft;
+            var newOrigin=-(firstOriginal.offsetLeft-paddingLeft);
+            if(!testiTrack.dataset.positioned){
+                testiPosition=newOrigin;
+                testiTrack.dataset.positioned='true';
+            }else if(oldWidth){
+                testiPosition=newOrigin+(testiPosition-oldOrigin)*(newWidth/oldWidth);
             }
-            while(testiTrack.scrollLeft<=cycleStart-cycleWidth){
-                testiTrack.scrollLeft+=cycleWidth;
-            }
+            cycleWidth=newWidth;
+            cycleOrigin=newOrigin;
+            normalizeTestiPosition();
+            renderTestiTrack();
         }
 
         function animateTestiTrack(now){
-            normalizeTestiPosition();
-            if(testiPaused || document.hidden){
-                testiPosition=testiTrack.scrollLeft;
-            }else{
-                var elapsed=Math.min(now-lastFrame,50);
-                testiPosition+=speed*elapsed/1000;
-                while(testiPosition>=cycleStart+cycleWidth)testiPosition-=cycleWidth;
-                while(testiPosition<=cycleStart-cycleWidth)testiPosition+=cycleWidth;
-                testiTrack.scrollLeft=testiPosition;
+            var elapsed=Math.min(now-lastFrame,34);
+            if(!document.hidden && !testiPointerActive){
+                testiPosition-=speed*elapsed/1000;
+                if(Math.abs(testiVelocity)>.002){
+                    testiPosition+=testiVelocity*elapsed;
+                    testiVelocity*=Math.pow(.95,elapsed/16.667);
+                }else{
+                    testiVelocity=0;
+                }
+                normalizeTestiPosition();
+                renderTestiTrack();
             }
             lastFrame=now;
             requestAnimationFrame(animateTestiTrack);
         }
 
-        function pauseTestiAuto(){
-            testiPaused=true;
-            testiTrack.classList.add('is-interacting');
-            clearTimeout(testiResume);
-        }
-
-        function resumeTestiAuto(delay){
-            clearTimeout(testiResume);
-            testiResume=setTimeout(function(){
-                testiPaused=false;
-                testiTrack.classList.remove('is-interacting');
-                lastFrame=performance.now();
-            },delay);
-        }
-
         testiTrack.addEventListener('pointerdown',function(event){
-            pauseTestiAuto();
-            testiDragging=true;
-            testiDragStartX=event.clientX;
-            testiDragStartScroll=testiTrack.scrollLeft;
+            testiPointerActive=true;
+            testiDragging=false;
+            testiAxis='';
+            testiPointerId=event.pointerId;
+            testiStartX=testiLastX=event.clientX;
+            testiStartY=event.clientY;
+            testiLastMove=performance.now();
+            testiVelocity=0;
+            testiTrack.classList.add('is-interacting');
             if(event.pointerType==='mouse')testiTrack.setPointerCapture(event.pointerId);
         },{passive:true});
-        testiTrack.addEventListener('pointermove',function(event){
-            if(!testiDragging)return;
-            var distance=event.clientX-testiDragStartX;
-            if(Math.abs(distance)>2){
-                testiTrack.scrollLeft=testiDragStartScroll-distance;
-                testiPosition=testiTrack.scrollLeft;
-                if(event.cancelable)event.preventDefault();
+
+        window.addEventListener('pointermove',function(event){
+            if(!testiPointerActive || event.pointerId!==testiPointerId)return;
+            var totalX=event.clientX-testiStartX;
+            var totalY=event.clientY-testiStartY;
+            if(!testiAxis && Math.max(Math.abs(totalX),Math.abs(totalY))>5){
+                testiAxis=Math.abs(totalX)>Math.abs(totalY)*1.05?'x':'y';
             }
+            if(testiAxis!=='x')return;
+            testiDragging=true;
+            var now=performance.now();
+            var elapsed=Math.max(now-testiLastMove,1);
+            var distance=event.clientX-testiLastX;
+            testiPosition+=distance;
+            var instantVelocity=distance/elapsed;
+            testiVelocity=Math.max(-2.4,Math.min(2.4,testiVelocity*.35+instantVelocity*.65));
+            testiLastX=event.clientX;
+            testiLastMove=now;
+            normalizeTestiPosition();
+            renderTestiTrack();
+            if(event.cancelable)event.preventDefault();
         },{passive:false});
+
         function finishTestiDrag(event){
-            if(!testiDragging)return;
+            if(!testiPointerActive || event.pointerId!==testiPointerId)return;
+            testiPointerActive=false;
             testiDragging=false;
             if(event.pointerType==='mouse' && testiTrack.hasPointerCapture(event.pointerId)){
                 testiTrack.releasePointerCapture(event.pointerId);
             }
+            if(testiAxis!=='x')testiVelocity=0;
             normalizeTestiPosition();
-            testiPosition=testiTrack.scrollLeft;
-            resumeTestiAuto(1600);
+            renderTestiTrack();
+            testiTrack.classList.remove('is-interacting');
+            testiPointerId=null;
+            lastFrame=performance.now();
         }
         window.addEventListener('pointerup',finishTestiDrag,{passive:true});
         window.addEventListener('pointercancel',finishTestiDrag,{passive:true});
-        testiTrack.addEventListener('wheel',function(){
-            pauseTestiAuto();
-            resumeTestiAuto(1600);
-        },{passive:true});
-        testiTrack.addEventListener('mouseenter',function(){
-            if(window.matchMedia('(hover:hover)').matches)pauseTestiAuto();
-        },{passive:true});
-        testiTrack.addEventListener('mouseleave',function(){
-            if(window.matchMedia('(hover:hover)').matches)resumeTestiAuto(800);
-        },{passive:true});
+
+        testiTrack.addEventListener('wheel',function(event){
+            var distance=Math.abs(event.deltaX)>Math.abs(event.deltaY)?event.deltaX:(event.shiftKey?event.deltaY:0);
+            if(!distance)return;
+            testiPosition-=distance;
+            testiVelocity=Math.max(-2.4,Math.min(2.4,-distance/16));
+            normalizeTestiPosition();
+            renderTestiTrack();
+            if(event.cancelable)event.preventDefault();
+        },{passive:false});
+        testiTrack.addEventListener('dragstart',function(event){event.preventDefault()});
         window.addEventListener('resize',measureTestiTrack);
 
         measureTestiTrack();
