@@ -253,6 +253,7 @@
         .testi-carousel-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
         .testi-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 28px;scrollbar-width:none}
         .testi-track::-webkit-scrollbar{display:none}
+        .testi-track.is-interacting{scroll-snap-type:none}
         .testi-card{min-width:320px;max-width:320px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:24px;flex-shrink:0;transition:border-color .3s,box-shadow .3s;scroll-snap-align:start}
         .testi-card:hover{border-color:rgba(245,197,24,.2);box-shadow:0 8px 32px var(--yglow2)}
         .testi-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
@@ -1086,6 +1087,45 @@
 
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
+
+    // testimonials: slow autoplay with full manual touch control
+    var testiTrack=document.getElementById('testiTrack');
+    if(testiTrack){
+        var testiAuto=null;
+        var testiResume=null;
+        var testiLastTime=0;
+        var testiPaused=false;
+        function runTestiAuto(time){
+            if(!testiLastTime)testiLastTime=time;
+            var delta=Math.min(time-testiLastTime,40);
+            testiLastTime=time;
+            if(!testiPaused && testiTrack.scrollWidth>testiTrack.clientWidth){
+                testiTrack.scrollLeft+=delta*0.018;
+                if(testiTrack.scrollLeft>=testiTrack.scrollWidth-testiTrack.clientWidth-1){
+                    testiTrack.scrollLeft=0;
+                }
+            }
+            testiAuto=requestAnimationFrame(runTestiAuto);
+        }
+        function pauseTestiAuto(){
+            testiPaused=true;
+            testiTrack.classList.add('is-interacting');
+            clearTimeout(testiResume);
+            testiResume=setTimeout(function(){
+                testiPaused=false;
+                testiTrack.classList.remove('is-interacting');
+            },2800);
+        }
+        ['touchstart','pointerdown','wheel'].forEach(function(eventName){
+            testiTrack.addEventListener(eventName,pauseTestiAuto,{passive:true});
+        });
+        testiTrack.addEventListener('mouseenter',function(){testiPaused=true},{passive:true});
+        testiTrack.addEventListener('mouseleave',function(){
+            clearTimeout(testiResume);
+            testiResume=setTimeout(function(){testiPaused=false},1800);
+        },{passive:true});
+        testiAuto=requestAnimationFrame(runTestiAuto);
+    }
 })();
 
 // step toggle
