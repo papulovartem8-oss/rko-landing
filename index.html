@@ -1107,6 +1107,7 @@
 
         var cycleWidth=0;
         var cycleStart=0;
+        var testiPosition=0;
         var testiPaused=false;
         var testiResume=null;
         var lastFrame=performance.now();
@@ -1121,7 +1122,10 @@
             cycleWidth=firstAfter.offsetLeft-firstOriginal.offsetLeft;
             if(!testiTrack.dataset.positioned){
                 testiTrack.scrollLeft=cycleStart;
+                testiPosition=cycleStart;
                 testiTrack.dataset.positioned='true';
+            }else{
+                testiPosition=testiTrack.scrollLeft;
             }
         }
 
@@ -1137,9 +1141,14 @@
 
         function animateTestiTrack(now){
             normalizeTestiPosition();
-            if(!testiPaused && !document.hidden){
+            if(testiPaused || document.hidden){
+                testiPosition=testiTrack.scrollLeft;
+            }else{
                 var elapsed=Math.min(now-lastFrame,50);
-                testiTrack.scrollLeft+=speed*elapsed/1000;
+                testiPosition+=speed*elapsed/1000;
+                while(testiPosition>=cycleStart+cycleWidth)testiPosition-=cycleWidth;
+                while(testiPosition<=cycleStart-cycleWidth)testiPosition+=cycleWidth;
+                testiTrack.scrollLeft=testiPosition;
             }
             lastFrame=now;
             requestAnimationFrame(animateTestiTrack);
