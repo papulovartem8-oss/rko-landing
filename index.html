@@ -1097,13 +1097,16 @@
         testiTrack.classList.add('is-autoplaying');
         var testiAuto=setInterval(function(){
             if(!testiPaused && testiTrack.scrollWidth>testiTrack.clientWidth){
+                var card=testiTrack.querySelector('.testi-card');
+                var step=card ? card.getBoundingClientRect().width+20 : testiTrack.clientWidth;
                 var maxScroll=testiTrack.scrollWidth-testiTrack.clientWidth;
-                testiTrack.scrollLeft+=1;
-                if(testiTrack.scrollLeft>=maxScroll){
-                    testiTrack.scrollTo({left:0,behavior:'auto'});
+                if(testiTrack.scrollLeft+step>=maxScroll-2){
+                    testiTrack.scrollTo({left:0,behavior:'smooth'});
+                }else{
+                    testiTrack.scrollBy({left:step,behavior:'smooth'});
                 }
             }
-        },60);
+        },5000);
         function pauseTestiAuto(){
             testiPaused=true;
             testiTrack.classList.add('is-interacting');
