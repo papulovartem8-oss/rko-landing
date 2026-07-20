@@ -167,9 +167,8 @@
         @keyframes ctaBtnPulse{0%,100%{box-shadow:0 4px 24px rgba(245,197,24,.4),0 0 0 1px rgba(245,197,24,.6)}50%{box-shadow:0 8px 32px rgba(245,197,24,.6),0 0 20px 4px rgba(245,197,24,.2),0 0 0 1px var(--yellow)}}
 
         /* AUTHORS */
-        .authors-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:16px}
-        .authors-scroll::-webkit-scrollbar{display:none}
-        .authors-page{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex-shrink:0;scroll-snap-align:start}
+        .authors-scroll{display:block}
+        .authors-page{display:grid;grid-template-columns:1fr 1fr;gap:14px}
         .author-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:all .45s;position:relative;cursor:pointer}
         .author-card:hover{border-color:rgba(245,197,24,.25);box-shadow:0 16px 48px var(--yglow2)}
         .author-avatar{width:100%;aspect-ratio:1;object-fit:cover;display:block;filter:grayscale(.2);transition:filter .4s}
@@ -209,10 +208,9 @@
         .scroll-hint{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:var(--w40);animation:scrollHintPulse 2s ease-in-out infinite}
         .scroll-hint svg{width:14px;height:14px}
         @keyframes scrollHintPulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:.8;transform:translateX(4px)}}
-        .authors-arrows{display:flex;justify-content:center;gap:12px;margin-top:16px}
-        .authors-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;color:var(--w40)}
-        .authors-arrow:hover{border-color:var(--yellow);color:var(--yellow);box-shadow:0 0 16px var(--yglow)}
-        .authors-arrow svg{width:18px;height:18px}
+        .authors-contact{text-align:center;margin:24px auto 0;max-width:620px;font-size:14px;line-height:1.7;color:var(--w60)}
+        .authors-contact a{color:var(--yellow);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(245,197,24,.35);transition:all .3s}
+        .authors-contact a:hover{color:var(--yellow2);border-bottom-color:var(--yellow2)}
 
         /* CASES */
         .cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
@@ -507,7 +505,7 @@
         <div class="sec-head center" data-anim="up">
             <div class="sec-label">Резиденты</div>
             <h2 class="sec-title">Наши авторы</h2>
-            <p class="sec-desc">Таланты, которых мы развиваем и продюсируем</p>
+            <p class="sec-desc">Одни из талантов, которых мы развиваем и продюсируем</p>
         </div>
         <div class="authors-scroll-wrap">
             <div class="authors-scroll" id="authorsScroll">
@@ -585,18 +583,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="authors-page">
-                    <div class="author-nda" style="grid-column:1/-1">
-                        <div class="nda-icon">?</div>
-                        <div class="nda-title">Под NDA</div>
-                        <div class="nda-text">Ещё 10+ авторов, которых мы не можем назвать — подписали соглашение о неразглашении</div>
-                    </div>
-                </div>
             </div>
-            <div class="authors-arrows">
-                <button class="authors-arrow" onclick="scrollAuthors(-1)" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-                <button class="authors-arrow" onclick="scrollAuthors(1)" aria-label="Вперёд"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-            </div>
+            <p class="authors-contact">С большим числом авторов и их кейсами можно ознакомиться лично — <a href="https://t.me/excellent_g" target="_blank" rel="noopener">напишите мне в Telegram</a>.</p>
         </div>
     </div>
 </section>
@@ -1070,24 +1058,6 @@
         });
     },{threshold:.3});
     document.querySelectorAll('.case-growth-value').forEach(function(el){growthObs.observe(el)});
-
-    // authors page sizing + scroll
-    function sizeAuthorPages(){
-        var scroll=document.getElementById('authorsScroll');
-        if(!scroll)return;
-        var w=scroll.offsetWidth;
-        var pages=scroll.querySelectorAll('.authors-page');
-        pages.forEach(function(p){p.style.width=w+'px'});
-    }
-    sizeAuthorPages();
-    window.addEventListener('resize',sizeAuthorPages);
-
-    window.scrollAuthors=function(dir){
-        var scroll=document.getElementById('authorsScroll');
-        if(!scroll)return;
-        var pageW=scroll.offsetWidth+16;
-        scroll.scrollBy({left:dir*pageW,behavior:'smooth'});
-    };
 
     // nav close
     document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('open')})});
