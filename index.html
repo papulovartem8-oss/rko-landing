@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M&amp;K Production center</title>
+    <title>M&amp;K Production Center</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -306,8 +306,8 @@
         }
         @media(max-width:640px){
             header{padding:0 16px}
-            header .inner{position:relative;justify-content:flex-end}
-            header .logo{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+            header .inner{justify-content:space-between}
+            header .logo{white-space:nowrap}
             .wrap{padding:0 16px}
             .hero{padding:90px 0 48px;min-height:auto}
             .hero h1{font-size:28px}
@@ -369,7 +369,7 @@
 <!-- LOADER -->
 <div class="loader" id="loader">
     <img src="photo_2026-07-16_13-23-00.jpg" alt="MK" class="loader-logo">
-    <div class="loader-title">M&amp;K <em>Production center</em></div>
+    <div class="loader-title">M&amp;K <em>Production Center</em></div>
     <div class="loader-sub">Loading experience</div>
     <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
 </div>
@@ -381,7 +381,7 @@
     <div class="inner">
         <a href="#" class="logo">
             <img src="photo_2026-07-16_13-23-00.jpg" alt="MK">
-            <span>M&amp;K <em>Production</em></span>
+            <span>M&amp;K <em>Production</em> Center</span>
         </a>
         <button class="burger" onclick="document.querySelector('nav').classList.toggle('open')" aria-label="Menu">
             <span></span><span></span><span></span>
@@ -411,7 +411,7 @@
             </div>
             <div class="hero-right">
                 <div class="hero-photo" id="heroPhoto">
-                    <img src="photo_2026-01-24_10-54-18.jpg" alt="M&K Production center">
+                    <img src="photo_2026-01-24_10-54-18.jpg" alt="M&K Production Center">
                 </div>
                 <p class="hero-caption" id="heroCap">Когда кто-то говорит невозможно, всегда есть «Другое мнение».</p>
             </div>
@@ -865,7 +865,7 @@
     <div class="wrap ft">
         <div class="ft-left">
             <img src="photo_2026-07-16_13-23-00.jpg" alt="MK">
-            <span class="ft-copy">&copy; 2026 M&amp;K Production center</span>
+            <span class="ft-copy">&copy; 2026 M&amp;K Production Center</span>
         </div>
         <div class="ft-links">
             <a href="https://t.me/excellent_g" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg></a>
@@ -916,7 +916,7 @@
         setTimeout(function(){document.getElementById('heroPhoto').classList.add('show')},200);
 
         var title=document.getElementById('heroTitle');
-        var words=[{t:'M&K',c:'y'},{t:'Production',c:''},{t:'center',c:''}];
+        var words=[{t:'M&K',c:'y'},{t:'Production',c:''},{t:'Center',c:''}];
         var charIdx=0;
         words.forEach(function(w){
             var wordSpan=document.createElement('span');
