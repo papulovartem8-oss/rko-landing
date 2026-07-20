@@ -218,6 +218,7 @@
 
         /* CASES */
         .cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+        .case-card:last-child:nth-child(odd){grid-column:1/-1}
         .case-card{border-radius:20px;border:1px solid var(--border);background:var(--bg2);padding:36px;transition:all .45s;position:relative;overflow:hidden}
         .case-card::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,var(--yglow),transparent 70%);pointer-events:none;opacity:0;transition:opacity .4s}
         .case-card:hover{border-color:rgba(245,197,24,.2);transform:translateY(-4px)}
@@ -239,12 +240,6 @@
         .case-growth-value{font-size:28px;font-weight:900;color:var(--yellow);letter-spacing:-.03em;opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
         .case-growth-value.vis{opacity:1;transform:translateY(0)}
         .case-growth-label{font-size:11px;color:var(--w40);margin-top:2px}
-
-        .case-expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.4,0,.2,1)}
-        .case-expand.open{grid-template-rows:1fr}
-        .case-expand-inner{overflow:hidden}
-        .case-expand-content{padding-top:16px;font-size:13px;color:var(--w60);line-height:1.7;opacity:0;transform:translateY(-6px);transition:opacity .3s .15s,transform .3s .15s}
-        .case-expand.open .case-expand-content{opacity:1;transform:translateY(0)}
 
         /* TESTIMONIALS */
         .testi-carousel-wrap{overflow:hidden;position:relative;padding:10px 0}
@@ -303,6 +298,7 @@
             .calc-card{grid-template-columns:1fr;gap:32px;padding:28px}
             .stats{grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
             .cases-grid{grid-template-columns:1fr}
+            .case-card:last-child:nth-child(odd){grid-column:auto}
         }
         @media(max-width:640px){
             header{padding:0 16px}
@@ -603,117 +599,90 @@
         </div>
         <div class="cases-grid">
             <div class="case-card" data-anim="up" data-delay="0">
-                <div class="case-tag">Лайфстайл</div>
-                <h3 class="case-title">Рост с нуля до 1M за 8 месяцев</h3>
-                <p class="case-desc">Автор пришёл с 12K подписчиков и минимальной монетизацией. Мы выстроили контент-стратегию, запустили коллаборации и вывели на стабильный доход.</p>
+                <div class="case-tag">Telegram</div>
+                <h3 class="case-title">Крупнейшая академия по закупам в Telegram</h3>
+                <p class="case-desc">На старте эксперт имел блог и локальную узнаваемость в админском комьюнити. Мы превратили эту базу в крупнейшую академию по закупке рекламы в Telegram: 350 действующих участников работают с 70% всех каналов рынка.</p>
                 <div class="case-metrics">
                     <div class="case-metric">
-                        <span class="case-metric-label">Подписчики</span>
+                        <span class="case-metric-label">Участники</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">12K</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">1.2M</span>
+                            <span class="case-metric-new">350 человек</span>
                         </div>
                     </div>
                     <div class="case-metric">
-                        <span class="case-metric-label">Доход / мес</span>
+                        <span class="case-metric-label">Охват рынка</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">15 000 &#8381;</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">850 000 &#8381;</span>
+                            <span class="case-metric-new">70% каналов</span>
                         </div>
                     </div>
                     <div class="case-metric">
-                        <span class="case-metric-label">Рекламодатели</span>
+                        <span class="case-metric-label">Примерная выручка</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">0</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">24</span>
+                            <span class="case-metric-new">~32 000 000 &#8381;</span>
                         </div>
                     </div>
                 </div>
                 <div class="case-growth">
                     <div class="case-growth-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
-                    <div><div class="case-growth-value" data-growth="+9 900%">+9 900%</div><div class="case-growth-label">рост подписчиков</div></div>
-                </div>
-                <div class="case-expand">
-                    <div class="case-expand-inner"><div class="case-expand-content">Работа началась с аудита контента и анализа конкурентов. Мы пересобрали контент-план, внедрили систему рекламных интеграций и вывели автора на ежемесячные коллаборации с крупными брендами. За 8 месяцев аудитория выросла в 100 раз, а доход стабилизировался на уровне 850K+/мес.</div></div>
+                    <div><div class="case-growth-value" data-growth="350">350</div><div class="case-growth-label">действующих участников</div></div>
                 </div>
             </div>
             <div class="case-card" data-anim="up" data-delay="150">
-                <div class="case-tag">Бизнес</div>
-                <h3 class="case-title">Эксперт &rarr; медийная личность</h3>
-                <p class="case-desc">Бизнес-тренер с офлайн-аудиторией хотел выйти в digital. За 6 месяцев запустили YouTube-канал, подкаст и линейку обучающих продуктов.</p>
+                <div class="case-tag">РКО</div>
+                <h3 class="case-title">Одна из крупнейших команд в РКО</h3>
+                <p class="case-desc">Инфлюенсер развивал блог о заработке, но не имел устойчивой экспертизы и постоянно менял направление. В работе с нами он сфокусировался на РКО и выстроил команду из 250 человек, ежедневно направляющую трафик через его партнёрские программы.</p>
                 <div class="case-metrics">
                     <div class="case-metric">
-                        <span class="case-metric-label">YouTube</span>
+                        <span class="case-metric-label">Команда</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">0</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">620K</span>
+                            <span class="case-metric-new">250 человек</span>
                         </div>
                     </div>
                     <div class="case-metric">
-                        <span class="case-metric-label">Запуск курса</span>
+                        <span class="case-metric-label">Трафик</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">&mdash;</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">12M &#8381;</span>
+                            <span class="case-metric-new">Ежедневно</span>
                         </div>
                     </div>
                     <div class="case-metric">
-                        <span class="case-metric-label">Охват</span>
+                        <span class="case-metric-label">Чистая выручка</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">5K</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">2.8M</span>
+                            <span class="case-metric-new">~5 000 000 &#8381;/мес.</span>
                         </div>
                     </div>
                 </div>
                 <div class="case-growth">
                     <div class="case-growth-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
-                    <div><div class="case-growth-value" data-growth="+55 900%">+55 900%</div><div class="case-growth-label">рост охватов</div></div>
-                </div>
-                <div class="case-expand">
-                    <div class="case-expand-inner"><div class="case-expand-content">Мы провели глубокий анализ ниши, разработали формат для YouTube, запустили подкаст и создали линейку обучающих продуктов. Первый запуск курса принёс 12M рублей. Охваты выросли с 5K до 2.8M, а эксперт стал узнаваемой медийной личностью в своей нише.</div></div>
+                    <div><div class="case-growth-value" data-growth="~5M ₽">~5M &#8381;</div><div class="case-growth-label">чистой выручки в месяц</div></div>
                 </div>
             </div>
             <div class="case-card" data-anim="up" data-delay="300">
-                <div class="case-tag">Beauty</div>
-                <h3 class="case-title">Из блогера — в бренд</h3>
-                <p class="case-desc">Beauty-автор с лояльной аудиторией мечтала о своей линейке косметики. Мы помогли с упаковкой, продвижением и запуском собственного бренда.</p>
+                <div class="case-tag">Инфопродукты</div>
+                <h3 class="case-title">Десятки запусков для наших экспертов</h3>
+                <p class="case-desc">Вместо одного кейса — десятки запусков различных инфопродуктов. Для каждого проекта мы выстраивали полную экосистему и создавали вокруг продукта самостоятельный бренд, который продолжал расти за счёт рекомендаций.</p>
                 <div class="case-metrics">
                     <div class="case-metric">
-                        <span class="case-metric-label">Свой бренд</span>
+                        <span class="case-metric-label">Запуски</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">Идея</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">Запуск</span>
+                            <span class="case-metric-new">Десятки</span>
                         </div>
                     </div>
                     <div class="case-metric">
-                        <span class="case-metric-label">Продажи / мес</span>
+                        <span class="case-metric-label">Подход</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">0</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">3.5M &#8381;</span>
+                            <span class="case-metric-new">Экосистема + бренд</span>
                         </div>
                     </div>
                     <div class="case-metric">
-                        <span class="case-metric-label">Аудитория</span>
+                        <span class="case-metric-label">Совокупная выручка</span>
                         <div class="case-metric-row">
-                            <span class="case-metric-old">200K</span>
-                            <span class="case-metric-arrow">&rarr;</span>
-                            <span class="case-metric-new">850K</span>
+                            <span class="case-metric-new">~100 000 000 &#8381;</span>
                         </div>
                     </div>
                 </div>
                 <div class="case-growth">
                     <div class="case-growth-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
-                    <div><div class="case-growth-value" data-growth="+325%">+325%</div><div class="case-growth-label">рост аудитории</div></div>
-                </div>
-                <div class="case-expand">
-                    <div class="case-expand-inner"><div class="case-expand-content">Помогли создать собственный бренд косметики: от разработки концепции и упаковки до маркетинговой стратегии запуска. Аудитория выросла с 200K до 850K, а ежемесячные продажи бренда достигли 3.5M рублей. Контент-стратегия встроена в воронку продаж.</div></div>
+                    <div><div class="case-growth-value" data-growth="~100M ₽">~100M &#8381;</div><div class="case-growth-label">совокупная выручка</div></div>
                 </div>
             </div>
         </div>
@@ -1268,18 +1237,6 @@ function closeAuthorModal(){
     document.body.style.overflow='';
 }
 
-// case toggle
-function toggleCase(el){
-    var card=el.closest('.case-card');
-    var expand=card.querySelector('.case-expand');
-    if(expand.classList.contains('open')){
-        expand.classList.remove('open');
-        el.innerHTML='Подробнее &rarr;';
-    }else{
-        expand.classList.add('open');
-        el.innerHTML='Свернуть &larr;';
-    }
-}
 </script>
 
 </body>
