@@ -305,6 +305,9 @@
             .cases-grid{grid-template-columns:1fr}
         }
         @media(max-width:640px){
+            header{padding:0 16px}
+            header .inner{position:relative;justify-content:flex-end}
+            header .logo{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
             .wrap{padding:0 16px}
             .hero{padding:90px 0 48px;min-height:auto}
             .hero h1{font-size:28px}
@@ -313,7 +316,7 @@
             .hero-photo{border-radius:16px}
             nav{display:none}
             nav.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:var(--bg2);padding:20px 28px;gap:16px;border-bottom:1px solid var(--border);z-index:99}
-            .burger{display:block}
+            .burger{display:block;margin-left:auto}
             .sec{padding:64px 0}
             .sec-head{margin-bottom:40px}
             .sec-title{font-size:26px}
