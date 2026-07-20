@@ -786,7 +786,7 @@
             </div>
             <div class="calc-result">
                 <div class="calc-result-label">Потенциал</div>
-                <div class="calc-result-num" id="calcResult">~15 000 000 &#8381;/год</div>
+                <div class="calc-result-num" id="calcResult">~4 500 000 &#8381;/год</div>
                 <div class="calc-result-sub">Прогнозируемый доход от монетизации</div>
                 <div class="calc-breakdown">
                     <div class="calc-breakdown-row"><span>Вовлечённость</span><strong id="engagementResult">Слабая вовлечённость · 5%</strong></div>
@@ -1014,12 +1014,11 @@
         var level=engagement>=30?'loyal':engagement>=15?'medium':'weak';
         var levelName=level==='loyal'?'Высокая вовлечённость':level==='medium'?'Средняя вовлечённость':'Слабая вовлечённость';
         var conversionRates={
-            expert:{loyal:30,medium:20,weak:10},
-            live:{loyal:15,medium:10,weak:5}
+            expert:{loyal:5,medium:3,weak:2},
+            live:{loyal:4,medium:2.5,weak:1.5}
         };
         var conversion=conversionRates[theme][level];
-        var leads=Math.round(views*conversion/100);
-        var monthly=leads*50000;
+        var monthly=Math.round(views*conversion/100*50000);
         var yearly=monthly*12;
         calcResult.textContent='~'+fmt(yearly)+' ₽/год';
         engagementResult.textContent=levelName+' · '+engagement.toFixed(1).replace('.0','')+'%';
