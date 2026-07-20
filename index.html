@@ -161,6 +161,13 @@
         .calc-result-num{font-size:42px;font-weight:900;letter-spacing:-.04em;color:var(--white);line-height:1;transition:transform .2s}
         .calc-result-num.bump{transform:scale(1.05)}
         .calc-result-sub{font-size:13px;color:var(--w40);margin-top:8px}
+        .calc-breakdown{width:100%;margin-top:20px;padding-top:18px;border-top:1px solid var(--border);text-align:left}
+        .calc-breakdown-row{display:flex;justify-content:space-between;gap:16px;font-size:12px;color:var(--w40)}
+        .calc-breakdown-row strong{color:var(--white);font-weight:700;text-align:right}
+        .calc-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:700;background:var(--yellow);color:var(--bg);text-decoration:none;transition:all .35s;position:relative;overflow:hidden;margin-top:24px;box-shadow:0 4px 24px rgba(245,197,24,.4),0 0 0 1px rgba(245,197,24,.6);animation:ctaBtnPulse 2s ease-in-out infinite}
+        .calc-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(245,197,24,.5),0 0 0 1px var(--yellow)}
+        .calc-cta-btn svg{width:18px;height:18px}
+        @keyframes ctaBtnPulse{0%,100%{box-shadow:0 4px 24px rgba(245,197,24,.4),0 0 0 1px rgba(245,197,24,.6)}50%{box-shadow:0 8px 32px rgba(245,197,24,.6),0 0 20px 4px rgba(245,197,24,.2),0 0 0 1px var(--yellow)}}
         .contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 
         /* AUTHORS */
@@ -341,6 +348,7 @@
             .calc-card{padding:20px;gap:24px}
             .calc-result-num{font-size:32px}
             .calc-result{padding:24px 16px}
+            .calc-cta-btn{padding:12px 24px;font-size:14px}
             .btn-glow{padding:12px 24px;font-size:14px}
             .cta-card{padding:48px 20px}
             .cta-card h2{font-size:26px}
@@ -811,6 +819,13 @@
                 <div class="calc-result-label">Потенциал</div>
                 <div class="calc-result-num" id="calcResult">~15 000 000 &#8381;/год</div>
                 <div class="calc-result-sub">Прогнозируемый доход от монетизации</div>
+                <div class="calc-breakdown">
+                    <div class="calc-breakdown-row"><span>Вовлечённость</span><strong id="engagementResult">Слабая · 5%</strong></div>
+                </div>
+                <a href="https://t.me/excellent_g" target="_blank" rel="noopener" class="calc-cta-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.014 12.014 0 0 0 11.944 0Zm5.654 8.22l-1.736 8.19c-.13.588-.475.73-.964.455l-2.664-1.963-1.286 1.238c-.143.14-.262.26-.537.26l.191-2.712 4.94-4.463c.214-.19-.047-.297-.333-.107l-6.11 3.849-2.632-.823c-.572-.18-.583-.572.12-.847l10.29-3.966c.476-.172.893.107.737.847Z"/></svg>
+                    Обсудить проект
+                </a>
             </div>
         </div>
     </div>
@@ -1016,6 +1031,7 @@
     var viewVal=document.getElementById('viewVal');
     var themeVal=document.getElementById('themeVal');
     var calcResult=document.getElementById('calcResult');
+    var engagementResult=document.getElementById('engagementResult');
 
     function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
     function updateCalc(){
@@ -1027,6 +1043,7 @@
         themeVal.textContent=themeSelect.options[themeSelect.selectedIndex].text;
         var engagement=(views/aud)*100;
         var level=engagement>=30?'loyal':engagement>=15?'medium':'weak';
+        var levelName=level==='loyal'?'Лояльная':level==='medium'?'Средняя':'Слабая';
         var conversionRates={
             expert:{loyal:30,medium:20,weak:10},
             live:{loyal:15,medium:10,weak:5}
@@ -1036,6 +1053,7 @@
         var monthly=leads*50000;
         var yearly=monthly*12;
         calcResult.textContent='~'+fmt(yearly)+' ₽/год';
+        engagementResult.textContent=levelName+' · '+engagement.toFixed(1).replace('.0','')+'%';
         calcResult.classList.add('bump');
         setTimeout(function(){calcResult.classList.remove('bump')},200);
     }
