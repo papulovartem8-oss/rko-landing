@@ -26,6 +26,11 @@
         .telegram-mini-app .hero{padding-top:calc(120px + var(--tg-content-safe-area-inset-top,0px))}
         .telegram-mini-app .sticky-tg{bottom:calc(14px + max(env(safe-area-inset-bottom),var(--tg-safe-area-inset-bottom,0px)))}
         .telegram-mini-app footer{padding-bottom:calc(40px + max(env(safe-area-inset-bottom),var(--tg-safe-area-inset-bottom,0px)))}
+        .telegram-mini-app.telegram-light body{text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 4px rgba(0,0,0,.72)}
+        .telegram-mini-app.telegram-light .circle-tap-hint{-webkit-text-stroke:.35px #08080A;text-shadow:0 1px 1px #08080A,0 0 4px rgba(0,0,0,.9)}
+        .telegram-mini-app.telegram-light .circle-arrow svg,
+        .telegram-mini-app.telegram-light .circle-icon svg{filter:drop-shadow(0 1px 1px #08080A) drop-shadow(0 0 2px rgba(0,0,0,.8))}
+        .telegram-mini-app.telegram-light :is(.hdr-btn,.btn-glow,.calc-cta-btn,.sticky-tg,.calc-select,button){text-shadow:none}
         .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
 
         /* LOADER */
@@ -863,6 +868,11 @@
     var telegramWebApp=window.Telegram&&window.Telegram.WebApp?window.Telegram.WebApp:null;
     if(telegramWebApp){
         document.documentElement.classList.add('telegram-mini-app');
+        function syncTelegramTheme(){
+            document.documentElement.classList.toggle('telegram-light',telegramWebApp.colorScheme==='light');
+        }
+        syncTelegramTheme();
+        if(typeof telegramWebApp.onEvent==='function')telegramWebApp.onEvent('themeChanged',syncTelegramTheme);
         try{
             telegramWebApp.ready();
             telegramWebApp.expand();
